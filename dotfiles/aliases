@@ -20,8 +20,11 @@ alias reload='. ~/.zshrc'
 # Editors
 alias ed="$EDITOR"
 alias ved="$VISUAL"
+alias todo='$EDITOR ~/.todo'
 
+# Misc System
 alias e='exit'
+alias brewuu="brew update && brew upgrade --all"
 
 # Pipe my public key to my clipboard.
 alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
