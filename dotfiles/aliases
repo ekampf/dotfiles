@@ -13,8 +13,12 @@ alias mkdir='mkdir -p'
 alias ack='ack-grep' 
 alias diff='colordiff -u'
 alias h='history'
-alias e="$EDITOR"
-alias v="$VISUAL"
+
+# Editors
+alias ed="$EDITOR"
+alias ved="$VISUAL"
+
+alias e='exit'
 
 # Pipe my public key to my clipboard.
 alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"

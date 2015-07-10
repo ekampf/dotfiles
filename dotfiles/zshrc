@@ -31,7 +31,7 @@ function rvm_info_for_prompt {
 }
 setopt promptsubst
 archey -c
-export PS1='%{$fg_no_bold[green]%}%n@%m:%~%{$reset_color%}:%{$fg_bold[white]%}$(rvm_info_for_prompt)%{$reset_color%}%{$fg_no_bold[yellow]%}$(parse_git_branch)%{$reset_color%} # '
+export PS1='%{$fg_no_bold[green]%}%n@%m:%~%{$reset_color%}:%{$fg_bold[white]%}$(rvm_info_for_prompt)%{$reset_color%}%{$fg_no_bold[yellow]%}$(parse_git_branch)%{$reset_color%} $ '
 
 # load our own completion functions
 fpath=(~/.zsh/completion /usr/local/share/zsh/site-functions $fpath)
