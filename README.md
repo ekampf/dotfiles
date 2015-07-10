@@ -9,12 +9,15 @@ Your dotfiles are how you personalize your system. These are mine.
 ## Install
 
 Clone the repo (Or fork it...):
+
     git clone git://github.com/ekampf/dotfiles.git
 
 Install required gems:
+
     bundle install
 
 Run the bootstrap script:
+
     ./bootstrap.rb
 
 #### Personalize
