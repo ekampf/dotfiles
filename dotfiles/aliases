@@ -60,6 +60,7 @@ alias ck="cookiecutter"
 
 # Xcode
 alias ios="open /Applications/Xcode.app/Contents/Applications/iOS\ Simulator.app"
+alias pi="pod install"
 
 # Pretty print the path
 alias path='echo $PATH | tr -s ":" "\n"'
