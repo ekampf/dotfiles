@@ -56,6 +56,7 @@ alias migrate="rake db:migrate db:rollback && rake db:migrate"
 # Python\Virtualenv
 alias v="source .venv/bin/activate"
 alias vd="deactivate"
+alias ck="cookiecutter"
 
 # Xcode
 alias ios="open /Applications/Xcode.app/Contents/Applications/iOS\ Simulator.app"
