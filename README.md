@@ -22,7 +22,12 @@ Run the bootstrap script:
 
 #### Personalize
 
-Put your customizations in dotfiles appended with `.local`:
+I keep all my project files at ~/Documents/workspace. You probably don't...
+So the first thing to do in order to get things working is to override the $WORKSPACE environment variable:
+
+    echo "export WORKSPACE=\"... whatever path you use ...\"" > ~/.zshenv.locall
+
+You can put other customizations in dotfiles appended with `.local`:
 
 * `~/.aliases.local`
 * `~/.gitconfig.local`
