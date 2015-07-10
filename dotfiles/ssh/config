@@ -1,0 +1,21 @@
+# Global Settings
+ForwardAgent yes
+#VisualHostKey yes
+HashKnownHosts no
+#ConnectTimeout 2
+
+Host *.amazonaws.com
+  User root
+  StrictHostKeyChecking no
+  UserKnownHostsFile /dev/null
+  LogLevel QUIET
+
+Host ec2-*.*.compute.amazonaws.com
+  User root
+  StrictHostKeyChecking no
+  UserKnownHostsFile /dev/null
+  LogLevel QUIET
+
+Host github.com
+  IdentityFile ~/.ssh/id_rsa
+  
