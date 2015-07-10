@@ -1,0 +1,14 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    inquirer (0.2.1)
+      term-ansicolor (>= 1.2.2)
+    term-ansicolor (1.3.2)
+      tins (~> 1.0)
+    tins (1.5.4)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  inquirer
