@@ -6,7 +6,7 @@ require 'fileutils'
 require 'yaml'
 require 'inquirer'
 
-DEFAULTS = YAML::load_file "defaults.yml"
+DEFAULTS = File.exist?("defaults.yml") ? YAML::load_file "defaults.yml" : {}
 
 def install
     install_oh_my_zsh()
