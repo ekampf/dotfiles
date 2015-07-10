@@ -1,8 +1,6 @@
 # Sample gitconfig
 #
 
-[hub]
-        protocol = https
 [user]
         name = <%= Ask.input "Your Github Author Name", default: default_name %>
         email = <%= Ask.input "Your Github Author Email", default: default_email %>
@@ -36,3 +34,6 @@
         #
         # Setting to git 2.0 default to suppress warning message
         default = simple
+        
+[include]
+  path = ~/.gitconfig.local
