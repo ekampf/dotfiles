@@ -66,7 +66,17 @@ ZSH_THEME_GIT_PROMPT_NOCACHE=1
 # (<branch><branch tracking>|<local status>)
 setopt promptsubst
 archey -c
-export PS1='%{$fg_no_bold[green]%}%n@%m:%~%{$reset_color%}:%{$fg_bold[white]%}$(rvm_info_for_prompt)%{$reset_color%}:$(git_prompt_info)$(git_remote_status)$(git_prompt_status) $ '
+
+# Prompt
+PROMPT='%{$fg_no_bold[green]%}%n@%m:%~%{$reset_color%}:%{$fg_bold[white]%}$(rvm_info_for_prompt)%{$reset_color%}:$(git_prompt_info)$(git_remote_status)$(git_prompt_status) $ '
+RPROMPT=''
+
+# Prompt - alternative idea (put the info on the right)
+# # left
+# PROMPT='%{$FG[226]%}%(!.#.⚡)%{$reset_color%} '
+#
+# # right
+# RPROMPT='%{$fg_bold[blue]%}%m%{$fg_bold[white]%}:%{$fg_bold[cyan]%}%30<...<%~%<<%u%{$reset_color%}$(git_prompt_info)$(git_remote_status)$(git_prompt_status)'
 
 # load our own completion functions
 fpath=(~/.zsh/completion /usr/local/share/zsh/site-functions $fpath)
