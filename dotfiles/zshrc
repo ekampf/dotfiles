@@ -68,7 +68,8 @@ setopt promptsubst
 archey -c
 
 # Prompt
-PROMPT='%{$fg_no_bold[green]%}%n@%m:%~%{$reset_color%}:%{$fg_bold[white]%}$(rvm_info_for_prompt)%{$reset_color%}:$(git_prompt_info)$(git_remote_status)$(git_prompt_status) $ '
+PROMPT='%{$fg_no_bold[green]%}%n@%m:%~%{$reset_color%}:%{$fg_bold[white]%}$(rvm_info_for_prompt)%{$reset_color%}:$(git_prompt_info)$(git_remote_status)$(git_prompt_status) 
+$ '
 RPROMPT=''
 
 # Prompt - alternative idea (put the info on the right)
