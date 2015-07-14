@@ -1,3 +1,5 @@
+export ZSH=$HOME/.oh-my-zsh
+
 # use vim as the visual editor
 export VISUAL='mate -w'
 export EDITOR=vim
