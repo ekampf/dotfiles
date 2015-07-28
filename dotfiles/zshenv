@@ -10,6 +10,7 @@ export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 export PATH="$ZSH/bin:$PATH"
 
 export WORKSPACE="$HOME/Documents/workspace/"
+export GOPATH="$WORKSPACE/gopath/"
 
 # Fix PIP's annoying "ValueError: unknown locale: UTF-8"
 export LC_ALL=en_US.UTF-8
