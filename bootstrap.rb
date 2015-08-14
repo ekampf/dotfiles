@@ -21,23 +21,28 @@ def install
     switch_to_zsh()
 
     puts "======================================================"
+    puts "Installing some pips"
+    puts "======================================================"
+    install_pip_dependencies()
+
+    puts "======================================================"
     puts "Symlinking files"
-    puts "======================================================"    
+    puts "======================================================"
     files = get_files_to_process()
     puts "Processing:\n "
     files.each { |f| puts "\t#{f}" }
     puts
     puts
-    
+
     file_options = %w{yes no always}
     always_overwrite = false
     files.each do |src_filename|
-        f = src_filename.split("/", 2)[1] # Get rid of the "dotfiles/" prefix        
+        f = src_filename.split("/", 2)[1] # Get rid of the "dotfiles/" prefix
         src_fullname = File.absolute_path(src_filename)
 
         puts %Q{mkdir -p "$HOME/.#{File.dirname(f)}"} if f =~ /\//
         system %Q{mkdir -p "$HOME/.#{File.dirname(f)}"} if f =~ /\//
-        
+
         target_filename = File.join(ENV['HOME'], ".#{f.sub(/\.erb$/, '')}")
         puts "Processing: #{f} => #{target_filename}"
         if File.exist?(target_filename)
@@ -45,7 +50,7 @@ def install
                 puts "\tfiles are identical"
             else
                 # should_overwrite = Ask.confirm("File already exists: #{target_filename}. Overwrite it?", clear: true, response: false, default: false)
-                
+
                 should_overwrite = always_overwrite
                 if !always_overwrite
                     response = Ask.list("File already exists: #{target_filename}. Overwrite it?", file_options)
@@ -80,13 +85,13 @@ end
 def process_file(f, target_filename)
     # ERB - render the erb template to target location
     # Other - symlink
-    
+
     if is_erb?(f)
         puts "\tGenerating #{target_filename}"
         erb_template = File.read(f)
         erb = ERB.new(erb_template)
         erb_rendered = ERB.new(erb_template).result(OpenStruct.new(DEFAULTS).instance_eval { binding })
-        
+
         File.open(target_filename, 'w') do |new_file|
             new_file.write(erb_rendered)
         end
@@ -109,7 +114,7 @@ def switch_to_zsh
         puts "using zsh"
         return
     end
-    
+
     should_switch = Ask.confirm("Switch to oh-my-zsh??", clear: true, response: false, default: true)
     if should_switch
         puts "switching to zsh"
@@ -122,7 +127,7 @@ def install_oh_my_zsh
         puts "found ~/.oh-my-zsh"
         return
     end
-    
+
     should_install = Ask.confirm("Install oh-my-zsh??", clear: true, response: false, default: true)
     if should_install
         puts "installing oh-my-zsh"
@@ -151,6 +156,10 @@ def apply_theme_to_iterm_profile_idx(index, color_scheme_path)
 
   run %{ /usr/libexec/PlistBuddy -c "Merge '#{color_scheme_path}' :'New Bookmarks':#{index}" ~/Library/Preferences/com.googlecode.iterm2.plist }
   run %{ defaults read com.googlecode.iterm2 }
+end
+
+def install_pip_dependencies
+    run %{pip install git-sweep}
 end
 
 install
