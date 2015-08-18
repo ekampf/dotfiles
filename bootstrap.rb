@@ -159,7 +159,7 @@ def apply_theme_to_iterm_profile_idx(index, color_scheme_path)
 end
 
 def install_pip_dependencies
-    run %{pip install git-sweep}
+    run %{pip install git-sweep pivotal_tools}
 end
 
 install
