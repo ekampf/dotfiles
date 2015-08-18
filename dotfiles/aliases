@@ -74,6 +74,8 @@ alias path='echo $PATH | tr -s ":" "\n"'
 
 # Misc.
 alias pt='pivotal_tools'
+alias ptbug='pivotal_tools create bug'
+alias ptf='pivotal_tools create feature'
 
 # Include custom aliases
 [[ -f ~/.aliases.local ]] && source ~/.aliases.local
