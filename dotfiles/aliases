@@ -72,5 +72,8 @@ alias pi="pod install"
 # Pretty print the path
 alias path='echo $PATH | tr -s ":" "\n"'
 
+# Misc.
+alias pt='pivotal_tools'
+
 # Include custom aliases
 [[ -f ~/.aliases.local ]] && source ~/.aliases.local
