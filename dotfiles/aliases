@@ -65,6 +65,8 @@ alias v="source .venv/bin/activate"
 alias vd="deactivate"
 alias ck="cookiecutter"
 
+alias simplehttp="python -m SimpleHTTPServer 8000"
+
 # Xcode
 alias ios="open /Applications/Xcode.app/Contents/Applications/iOS\ Simulator.app"
 alias pi="pod install"
