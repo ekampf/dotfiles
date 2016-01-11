@@ -6,7 +6,8 @@ export EDITOR=vim
 
 # ensure dotfiles bin directory is loaded first
 export PATH="$HOME/.bin:/usr/local/sbin:$PATH"
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+export PATH="$HOME/.rvm/bin:$PATH" # Add RVM to PATH for scripting
+export PATH="$HOME/.nenv/bin:$PATH" # Add NENV to PATH for scripting
 export PATH="$ZSH/bin:$PATH"
 
 export WORKSPACE="$HOME/Documents/workspace/"
