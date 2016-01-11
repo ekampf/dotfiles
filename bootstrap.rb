@@ -26,6 +26,11 @@ def install
     install_pip_dependencies()
 
     puts "======================================================"
+    puts "Installing nenv"
+    puts "======================================================"
+    install_nenv()
+
+    puts "======================================================"
     puts "Symlinking files"
     puts "======================================================"
     files = get_files_to_process()
@@ -105,6 +110,10 @@ def zsh_installed?
     File.exist?(File.join(ENV['HOME'], ".oh-my-zsh"))
 end
 
+def brew_installed?
+    return !run("which brew").empty?
+end
+
 def zsh_active?
     ENV["SHELL"] =~ /zsh/
 end
@@ -158,8 +167,22 @@ def apply_theme_to_iterm_profile_idx(index, color_scheme_path)
   run %{ defaults read com.googlecode.iterm2 }
 end
 
+def install_brew_dependencies
+    if !brew_installed?
+        run 'ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"'
+    end
+    run %{brew install git}
+end
+
 def install_pip_dependencies
     run %{pip install git-sweep pivotal_tools httpie}
+end
+
+def install_nenv
+    nenv_path = File.expand_path('~/.nenv')
+    if !Dir.exists?(nenv_path)
+        run %{git clone https://github.com/ryuone/nenv.git ~/.nenv}
+    end
 end
 
 install
