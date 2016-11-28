@@ -171,10 +171,14 @@ def install_brew_dependencies
     if !brew_installed?
         run 'ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"'
     end
-    run %{brew install git}
+    run %{brew tap homebrew/science}
+    run %{brew tap homebrew/python}
+    run %{brew cask install java}
+    run %{brew install git python scipy numpy graphviz swiftlint scala redis memcached apache-spark ffmpeg httpie boost wget webp}
 end
 
 def install_pip_dependencies
+    run %{pip install -U pip setuptools}
     run %{pip install git-sweep pivotal_tools httpie}
 end
 
