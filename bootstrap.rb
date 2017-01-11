@@ -36,6 +36,11 @@ def install
     install_nenv()
 
     puts "======================================================"
+    puts "Installing Android SDK"
+    puts "======================================================"
+    install_android_sdk()
+
+    puts "======================================================"
     puts "Symlinking files"
     puts "======================================================"
     files = get_files_to_process()
@@ -180,13 +185,21 @@ def install_brew_dependencies
     run %{brew tap homebrew/python}
     run %{brew cask install java}
     run %{brew install git python scipy numpy graphviz scala redis memcached apache-spark ffmpeg httpie boost curl wget webp libxml2 libyaml archey gnupg gnupg2 android-sdk}
-
-    puts "Consider updating Android SDK later by running: android update sdk --no-ui"
 end
 
 def install_pip_dependencies
     run %{pip install -U pip setuptools}
     run %{pip install git-sweep pivotal_tools httpie}
+end
+
+def install_android_sdk
+    # Update or install SDK components.
+    # Install platform-tools to get adb.
+    run %{echo y | android update sdk --no-ui --all --filter "tools","platform-tools"}
+    # Install Build Tools (23.0.2 is necessary to build using gradle).
+    run %{echo y | android update sdk --no-ui --all --filter "build-tools","build-tools-23.0.2"}
+    # Install Google Play Services.
+    run %{echo y | android update sdk --no-ui --all --filter "extra-google-google_play_services"}
 end
 
 def install_nenv
