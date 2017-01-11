@@ -19,5 +19,7 @@ export PATH=$PATH:$GOPATH/bin
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
+export ANDROID_HOME=/usr/local/opt/android-sdk
+
 # Local config
 [[ -f ~/.zshenv.local ]] && source ~/.zshenv.local
