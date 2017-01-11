@@ -21,6 +21,11 @@ def install
     switch_to_zsh()
 
     puts "======================================================"
+    puts "Installing Homebrew deprendencies"
+    puts "======================================================"
+    install_brew_dependencies()
+
+    puts "======================================================"
     puts "Installing some pips"
     puts "======================================================"
     install_pip_dependencies()
@@ -175,6 +180,8 @@ def install_brew_dependencies
     run %{brew tap homebrew/python}
     run %{brew cask install java}
     run %{brew install git python scipy numpy graphviz scala redis memcached apache-spark ffmpeg httpie boost curl wget webp libxml2 libyaml archey gnupg gnupg2 android-sdk}
+
+    puts "Consider updating Android SDK later by running: android update sdk --no-ui"
 end
 
 def install_pip_dependencies
