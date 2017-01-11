@@ -1,4 +1,4 @@
-plugins=(git bundler brew gem rbates rvm nvm pip bower capistrano python osx textmate sublime)
+plugins=(git bundler brew gem rbates rvm nvm pip bower capistrano python osx textmate sublime react-native)
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
