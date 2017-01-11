@@ -13,13 +13,13 @@ export PATH="$ZSH/bin:$PATH"
 export WORKSPACE="$HOME/workspace/"
 export GOPATH="$WORKSPACE/gopath/"
 
-export PATH=$PATH:$GOPATH/bin
+export PATH="$PATH:$GOPATH/bin"
 
 # Fix PIP's annoying "ValueError: unknown locale: UTF-8"
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
-export ANDROID_HOME=/usr/local/opt/android-sdk
+export ANDROID_HOME="/usr/local/opt/android-sdk"
 
 # Local config
 [[ -f ~/.zshenv.local ]] && source ~/.zshenv.local
