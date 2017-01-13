@@ -4,6 +4,9 @@ ForwardAgent yes
 HashKnownHosts no
 #ConnectTimeout 2
 
+Host *
+    UseKeychain yes
+
 Host *.amazonaws.com
   User root
   StrictHostKeyChecking no
@@ -18,4 +21,3 @@ Host ec2-*.*.compute.amazonaws.com
 
 Host github.com
   IdentityFile ~/.ssh/id_rsa
-  
