@@ -1,0 +1,9 @@
+"*":
+  core:
+    telemetryConsent: "limited"
+  "exception-reporting":
+    userId: "199f5aad-4a7e-02b3-5130-101402f1235d"
+  "package-sync":
+    createOnChange: true
+    forceOverwrite: true
+  welcome: {}

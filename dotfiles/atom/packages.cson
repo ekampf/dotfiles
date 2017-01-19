@@ -1,0 +1,15 @@
+packages: [
+  "atom-beautify"
+  "autoclose-html"
+  "editorconfig"
+  "es6-javascript"
+  "highlight-selected"
+  "linter"
+  "linter-htmlhint"
+  "linter-stylelint"
+  "package-sync"
+  "pigments"
+  "seti-ui"
+  "tabs-to-spaces"
+  "todo-show"
+]
