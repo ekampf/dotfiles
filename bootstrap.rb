@@ -193,6 +193,9 @@ def install_pip_dependencies
 end
 
 def install_android_sdk
+    should_run = Ask.confirm("Update Android SDK?", clear: true, response: false, default: true)
+    return if !should_run
+
     # Update or install SDK components.
     # Install platform-tools to get adb.
     run %{echo y | android update sdk --no-ui --all --filter "tools","platform-tools"}
