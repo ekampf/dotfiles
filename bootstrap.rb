@@ -188,7 +188,7 @@ def install_brew_dependencies
 end
 
 def install_pip_dependencies
-    run %{pip install -U pip setuptools}
+    run %{pip install -U pip setuptools virtualenv}
     run %{pip install git-sweep pivotal_tools httpie}
 end
 
