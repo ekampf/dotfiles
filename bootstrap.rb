@@ -184,7 +184,7 @@ def install_brew_dependencies
     run %{brew tap homebrew/science}
     run %{brew tap homebrew/python}
     run %{brew cask install java}
-    run %{brew install git python scipy numpy graphviz scala redis memcached apache-spark ffmpeg httpie boost curl wget webp libxml2 libyaml archey gnupg gnupg2 android-sdk}
+    run %{brew install git python scipy numpy graphviz scala redis memcached apache-spark ffmpeg httpie boost curl wget webp libxml2 libyaml archey gnupg gnupg2 carthage android-sdk}
 end
 
 def install_pip_dependencies
