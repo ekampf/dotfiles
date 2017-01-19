@@ -207,6 +207,11 @@ def install_nenv
     if !Dir.exists?(nenv_path)
         run %{git clone https://github.com/ryuone/nenv.git ~/.nenv}
     end
+    run %{nenv rehash}
+    puts "Installing NodeJS 7.4.0"
+    run %{nenv install 7.4.4}
+    puts "Installing NodeJS 6.9.4"
+    run %{nenv install 6.9.4}
 end
 
 install
