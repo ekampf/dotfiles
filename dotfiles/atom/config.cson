@@ -6,4 +6,5 @@
   "package-sync":
     createOnChange: true
     forceOverwrite: true
-  welcome: {}
+  welcome:
+    showOnStartup: false

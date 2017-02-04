@@ -9,6 +9,8 @@ packages: [
   "linter-stylelint"
   "package-sync"
   "pigments"
+  "react"
+  "react-snippets"
   "seti-ui"
   "tabs-to-spaces"
   "todo-show"

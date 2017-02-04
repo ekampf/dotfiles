@@ -9,3 +9,15 @@
 # atom.workspace.observeTextEditors (editor) ->
 #   editor.onDidSave ->
 #     console.log "Saved! #{editor.getPath()}"
+
+atom.commands.add 'atom-workspace', 'dot-atom:demo', ->
+  atom.notifications.addInfo "Hello from dot-atom:demo"
+
+# Toggle between light and dark theme.
+atom.commands.add 'atom-workspace', 'dot-atom:toggle-theme', ->
+  activeThemes = atom.themes.getActiveThemeNames()
+
+  if activeThemes[0].indexOf("light") > 0
+    atom.config.set("core.themes", ["one-dark-ui", "one-dark-syntax"])
+  else
+    atom.config.set("core.themes", ["one-light-ui", "one-light-syntax"])
