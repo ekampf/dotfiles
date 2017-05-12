@@ -93,7 +93,7 @@ RPROMPT=''
 # RPROMPT='%{$fg_bold[blue]%}%m%{$fg_bold[white]%}:%{$fg_bold[cyan]%}%30<...<%~%<<%u%{$reset_color%}$(git_prompt_info)$(git_remote_status)$(git_prompt_status)'
 
 # load our own completion functions
-fpath=(~/.zsh/completion /usr/local/share/zsh/site-functions $fpath)
+fpath=(~/.zsh/completion /usr/local/share/zsh/site-functions /usr/local/share/zsh-completions $fpath)
 
 # completion
 autoload -U compinit
