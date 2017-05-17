@@ -41,6 +41,11 @@ def install
     install_android_sdk()
 
     puts "======================================================"
+    puts "Installing Atom packages"
+    puts "======================================================"
+    install_atom_packages()
+
+    puts "======================================================"
     puts "Symlinking files"
     puts "======================================================"
     files = get_files_to_process()
@@ -182,7 +187,6 @@ def install_brew_dependencies
         run 'ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"'
     end
     run %{brew tap homebrew/science}
-    run %{brew tap homebrew/python}
     run %{brew cask install java}
     run %{brew install git python scipy numpy graphviz scala redis memcached apache-spark ffmpeg httpie boost curl wget webp libxml2 libyaml archey gnupg gnupg2 carthage swiftlint android-sdk}
 end
@@ -203,6 +207,13 @@ def install_android_sdk
     run %{echo y | android update sdk --no-ui --all --filter "build-tools","build-tools-23.0.2"}
     # Install Google Play Services.
     run %{echo y | android update sdk --no-ui --all --filter "extra-google-google_play_services"}
+end
+
+def install_atom_packages
+  should_run = Ask.confirm("Install Atom packages?", clear: true, response: false, default: true)
+  return if !should_run
+
+  run %{apm install seti-ui editorconfig todo-show pigments atom-beautify prettier-atom highlight-selected sort-lines toggle-quotes color-picker linter linter-ui-default linter-eslint}
 end
 
 def install_nenv

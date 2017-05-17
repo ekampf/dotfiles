@@ -3,6 +3,10 @@
     useKite: false
   core:
     telemetryConsent: "limited"
+    themes: [
+      "seti-ui"
+      "solarized-dark-syntax"
+    ]
   editor:
     fontSize: 15
   "exception-reporting":
