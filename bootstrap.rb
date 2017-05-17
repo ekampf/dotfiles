@@ -212,7 +212,7 @@ def install_nenv
     end
     run %{nenv rehash}
     puts "Installing NodeJS 7.4.0"
-    run %{nenv install 7.4.4}
+    run %{nenv install 7.10.0}
     puts "Installing NodeJS 6.9.4"
     run %{nenv install 6.9.4}
 end
