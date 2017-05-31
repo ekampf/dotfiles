@@ -80,6 +80,31 @@ alias ptbug='pivotal_tools create bug'
 alias ptf='pivotal_tools create feature'
 
 # ------------------------------------
+# Kubernetes aliases
+# ------------------------------------
+
+# read ops
+alias pods='kubectl get pods'
+alias svc='kubectl get svc'
+alias rc='kubectl get rc'
+alias rs='kubectl get rs'
+alias dep='kubectl get deployment'
+alias nodes='kubectl get nodes'
+alias secrets='kubectl get secret'
+alias get='kubectl get'
+alias logs='kubectl logs'
+alias desc='kubectl describe'
+
+# edit ops
+alias kedit='kubectl edit'
+alias kdel='kubectl delete'
+alias kdeldep='kubectl delete deployment'
+alias keditdep='kubectl edit deployment'
+
+# Open shell to a running pod
+kssh() { kubectl exec $1 -ti -- bash; }
+
+# ------------------------------------
 # Docker alias and function
 # ------------------------------------
 
