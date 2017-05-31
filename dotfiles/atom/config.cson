@@ -2,17 +2,32 @@
   "autocomplete-python":
     useKite: false
   core:
+    ignoredNames: [
+      ".git"
+      ".hg"
+      ".svn"
+      ".DS_Store"
+      "._*"
+      "*.pyc"
+      "Thumbs.db"
+      "desktop.ini"
+      ".venv/"
+    ]
+    projectHome: "/Users/ekampf/workspace"
     telemetryConsent: "limited"
     themes: [
       "seti-ui"
       "solarized-dark-syntax"
     ]
   editor:
-    fontSize: 15
+    fontSize: 12
   "exception-reporting":
     userId: "199f5aad-4a7e-02b3-5130-101402f1235d"
   "package-sync":
     createOnChange: true
     forceOverwrite: true
+  "tree-view":
+    hideIgnoredNames: true
+    hideVcsIgnoredFiles: true
   welcome:
     showOnStartup: false
