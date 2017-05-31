@@ -70,6 +70,7 @@ alias simplehttp="python -m SimpleHTTPServer 8000"
 # Xcode
 alias ios="open /Applications/Xcode.app/Contents/Applications/iOS\ Simulator.app"
 alias pi="pod install"
+alias carto="carthage outdated"
 
 # Pretty print the path
 alias path='echo $PATH | tr -s ":" "\n"'
