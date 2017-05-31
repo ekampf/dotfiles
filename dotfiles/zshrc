@@ -181,5 +181,8 @@ _load_settings() {
 }
 _load_settings "$HOME/.zsh/configs"
 
+# added by travis gem
+[ -f /Users/ekampf/.travis/travis.sh ] && source /Users/ekampf/.travis/travis.sh
+
 # Local config
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
