@@ -193,14 +193,17 @@ def install_brew_dependencies
     run %{brew cask install java}
     run %{brew install git python scipy numpy graphviz scala redis memcached apache-spark ffmpeg httpie boost curl wget webp libxml2 libyaml archey gnupg gnupg2 carthage swiftlint packer}
 
-    puts "Installing browsers (Chrome, FF, ...)"
-    run %{brew cask install google-chrome google-chrome-canary firefox safari-technology-preview}
+    if Ask.confirm("Install browsers? (google-chrome google-chrome-canary firefox safari-technology-preview)", clear: true, response: false, default: true)
+      run %{brew cask install google-chrome google-chrome-canary firefox safari-technology-preview}
+    end
 
-    puts "Installing dev tools (java, iterm2, atom, tower, spectacle)"
-    run %{brew cask install iterm2 atom mou tower}
+    if Ask.confirm("Install dev tools? (iterm2 atom mou tower)", clear: true, response: false, default: true)
+      run %{brew cask install iterm2 atom mou tower}
+    end
 
-    puts "Installing general utilities (dropbox, lastpass, vlc, hipchat, slack, ...)"
-    run %{brew cask install dropbox vlc lastpass hipchat slack screenflow, spectacle the-unarchiver}
+    if Ask.confirm("Install essential utils? (dropbox vlc lastpass hipchat slack screenflow, spectacle the-unarchiver)", clear: true, response: false, default: true)
+      run %{brew cask install dropbox vlc lastpass hipchat slack screenflow, spectacle the-unarchiver}
+    end
 end
 
 def install_pip_dependencies
