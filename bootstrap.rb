@@ -188,7 +188,7 @@ def install_brew_dependencies
     end
     run %{brew tap homebrew/science}
     run %{brew cask install java}
-    run %{brew install git python scipy numpy graphviz scala redis memcached apache-spark ffmpeg httpie boost curl wget webp libxml2 libyaml archey gnupg gnupg2 carthage swiftlint}
+    run %{brew install git python scipy numpy graphviz scala redis memcached apache-spark ffmpeg httpie boost curl wget webp libxml2 libyaml archey gnupg gnupg2 carthage swiftlint packer}
 
     puts "Installing browsers (Chrome, FF, ...)"
     run %{brew cask install google-chrome google-chrome-canary firefox safari-technology-preview}
