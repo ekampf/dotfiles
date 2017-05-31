@@ -189,6 +189,15 @@ def install_brew_dependencies
     run %{brew tap homebrew/science}
     run %{brew cask install java}
     run %{brew install git python scipy numpy graphviz scala redis memcached apache-spark ffmpeg httpie boost curl wget webp libxml2 libyaml archey gnupg gnupg2 carthage swiftlint}
+
+    puts "Installing browsers (Chrome, FF, ...)"
+    run %{brew cask install google-chrome google-chrome-canary firefox safari-technology-preview}
+
+    puts "Installing dev tools (iterm2, atom, tower, spectacle)"
+    run %{brew cask install iterm2 atom mou tower}
+
+    puts "Installing general utilities (dropbox, lastpass, vlc, hipchat, slack, ...)"
+    run %{brew cask install dropbox vlc lastpass hipchat slack screenflow, spectacle the-unarchiver}
 end
 
 def install_pip_dependencies
