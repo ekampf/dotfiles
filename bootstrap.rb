@@ -187,13 +187,16 @@ def install_brew_dependencies
         run 'ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"'
     end
     run %{brew tap homebrew/science}
+    run %{brew tap caskroom/cask}
+    run %{brew tap caskroom/versions}
+
     run %{brew cask install java}
     run %{brew install git python scipy numpy graphviz scala redis memcached apache-spark ffmpeg httpie boost curl wget webp libxml2 libyaml archey gnupg gnupg2 carthage swiftlint packer}
 
     puts "Installing browsers (Chrome, FF, ...)"
     run %{brew cask install google-chrome google-chrome-canary firefox safari-technology-preview}
 
-    puts "Installing dev tools (iterm2, atom, tower, spectacle)"
+    puts "Installing dev tools (java, iterm2, atom, tower, spectacle)"
     run %{brew cask install iterm2 atom mou tower}
 
     puts "Installing general utilities (dropbox, lastpass, vlc, hipchat, slack, ...)"
