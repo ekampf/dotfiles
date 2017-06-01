@@ -14,7 +14,7 @@ Clone the repo (Or fork it...):
 
 Install required gems:
 
-    bundle install
+    gem install bundler && bundle install
 
 Run the bootstrap script:
 
@@ -40,7 +40,7 @@ For example, your `~/.aliases.local` might look like this:
 
     # Productivity
     alias todo='$EDITOR ~/.todo'
-    
+
     # Easy Folder access
     alias go='cd $HOME/Documents/workspace'
 
