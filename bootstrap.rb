@@ -197,8 +197,8 @@ def install_brew_dependencies
       run %{brew cask install google-chrome google-chrome-canary firefox safari-technology-preview}
     end
 
-    if Ask.confirm("Install dev tools? (iterm2 atom mou tower)", clear: true, response: false, default: true)
-      run %{brew cask install iterm2 atom mou tower}
+    if Ask.confirm("Install dev tools? (iterm2 atom tower)", clear: true, response: false, default: true)
+      run %{brew cask install iterm2 atom tower}
     end
 
     if Ask.confirm("Install essential utils? (dropbox vlc lastpass hipchat slack screenflow, spectacle the-unarchiver)", clear: true, response: false, default: true)
