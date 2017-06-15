@@ -14,6 +14,8 @@ alias ack='ack-grep'
 alias diff='colordiff -u'
 alias h='history'
 
+alias watch='watch '
+
 # Reloads ZSH
 alias reload='. ~/.zshrc'
 
@@ -61,6 +63,8 @@ alias br="bundle exec rake"
 alias migrate="rake db:migrate db:rollback && rake db:migrate"
 
 # Python\Virtualenv
+alias vcreate="virtualenv .venv --clear"
+alias vcreate3="virtualenv .venv --clear -p $(which python3)"
 alias v="source .venv/bin/activate"
 alias vd="deactivate"
 alias ck="cookiecutter"

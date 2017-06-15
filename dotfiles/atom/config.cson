@@ -2,6 +2,9 @@
   "autocomplete-python":
     useKite: false
   core:
+    disabledPackages: [
+      "language-python"
+    ]
     ignoredNames: [
       ".git"
       ".hg"
@@ -23,6 +26,8 @@
     fontSize: 12
   "exception-reporting":
     userId: "199f5aad-4a7e-02b3-5130-101402f1235d"
+  "linter-ui-default":
+    panelHeight: 36
   "package-sync":
     createOnChange: true
     forceOverwrite: true

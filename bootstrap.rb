@@ -191,7 +191,7 @@ def install_brew_dependencies
     run %{brew tap caskroom/versions}
 
     run %{brew cask install java}
-    run %{brew install git python scipy numpy graphviz scala redis memcached apache-spark ffmpeg httpie boost curl wget webp libxml2 libyaml archey gnupg gnupg2 carthage swiftlint packer}
+    run %{brew install git watch tree python scipy numpy graphviz scala redis memcached apache-spark ffmpeg httpie boost curl wget webp libxml2 libyaml archey gnupg gnupg2 carthage swiftlint packer}
 
     if Ask.confirm("Install browsers? (google-chrome google-chrome-canary firefox safari-technology-preview)", clear: true, response: false, default: true)
       run %{brew cask install google-chrome google-chrome-canary firefox safari-technology-preview}
