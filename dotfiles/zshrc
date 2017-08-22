@@ -18,8 +18,6 @@ COMPLETION_WAITING_DOTS="true"
 source $ZSH/oh-my-zsh.sh
 
 # Load NENV
-eval "$(nenv init -)"
-source ~/.nenv/completions/nenv.zsh
 
 function rvm_info_for_prompt {
   ruby_version=$(~/.rvm/bin/rvm-prompt)
@@ -29,14 +27,6 @@ function rvm_info_for_prompt {
 }
 function virtualenv_info {
     [ $VIRTUAL_ENV ] && echo '('`basename $VIRTUAL_ENV`') '
-}
-function nenv_info {
-    node_version=$(~/.nenv/bin/nenv version)
-    if [ -n "$node_version" ]; then
-        node_version=${node_version:0:6}
-        node_version="$(echo -e "${node_version}" | tr -d '[[:space:]]')"
-        echo "node $node_version"
-    fi
 }
 
 ZSH_THEME="agnoster"
@@ -81,7 +71,7 @@ setopt promptsubst
 archey -c
 
 # Prompt
-PROMPT='%{$fg_no_bold[green]%}%n@%m:%~%{$reset_color%}:%{$fg_bold[white]%}$(nenv_info)%{$reset_color%}::%{$fg_bold[white]%}$(rvm_info_for_prompt)%{$reset_color%}:$(git_prompt_info)$(git_remote_status)$(git_prompt_status)
+PROMPT='%{$fg_no_bold[green]%}%n@%m:%~%{$reset_color%}::%{$fg_bold[white]%}$(rvm_info_for_prompt)%{$reset_color%}:$(git_prompt_info)$(git_remote_status)$(git_prompt_status)
 $ '
 RPROMPT=''
 
