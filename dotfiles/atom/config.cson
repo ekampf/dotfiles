@@ -1,4 +1,7 @@
 "*":
+  "atom-beautify":
+    general:
+      _analyticsUserId: "39bb271b-7c95-4a1f-b9c8-6c70523246f8"
   "autocomplete-python":
     useKite: false
   core:
