@@ -108,6 +108,7 @@ alias keditdep='kubectl edit deployment'
 
 # Open shell to a running pod
 kssh() { kubectl exec $1 -ti -- bash; }
+kssha() { kubectl exec $1 -ti -- /bin/ash; }
 
 # ------------------------------------
 # Docker alias and function
