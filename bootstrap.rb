@@ -33,17 +33,17 @@ def install
     puts "======================================================"
     puts "Installing nenv"
     puts "======================================================"
-    install_nenv()
+    # install_nenv()
 
     puts "======================================================"
     puts "Installing Android SDK"
     puts "======================================================"
-    install_android_sdk()
+    # install_android_sdk()
 
     puts "======================================================"
     puts "Installing Atom packages"
     puts "======================================================"
-    install_atom_packages()
+    # install_atom_packages()
 
     puts "======================================================"
     puts "Symlinking files"
