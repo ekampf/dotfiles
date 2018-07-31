@@ -1,41 +1,18 @@
 "*":
   "atom-beautify":
     general:
-      _analyticsUserId: "39bb271b-7c95-4a1f-b9c8-6c70523246f8"
-  "autocomplete-python":
-    useKite: false
+      _analyticsUserId: "1fcd6e62-265a-40e5-ab12-b9a32af7f11a"
   core:
     disabledPackages: [
-      "language-python"
+      "markdown-preview"
     ]
-    ignoredNames: [
-      ".git"
-      ".hg"
-      ".svn"
-      ".DS_Store"
-      "._*"
-      "*.pyc"
-      "Thumbs.db"
-      "desktop.ini"
-      ".venv/"
-    ]
-    projectHome: "/Users/ekampf/workspace"
     telemetryConsent: "limited"
-    themes: [
-      "seti-ui"
-      "solarized-dark-syntax"
-    ]
   editor:
-    fontSize: 12
+    fontSize: 11
   "exception-reporting":
-    userId: "199f5aad-4a7e-02b3-5130-101402f1235d"
-  "linter-ui-default":
-    panelHeight: 36
-  "package-sync":
-    createOnChange: true
-    forceOverwrite: true
+    userId: "d0652209-2c5f-4ea4-b4e2-914a992bfbbb"
+  "linter-ui-default": {}
   "tree-view":
-    hideIgnoredNames: true
     hideVcsIgnoredFiles: true
   welcome:
     showOnStartup: false
