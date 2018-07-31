@@ -31,9 +31,9 @@ def install
     install_pip_dependencies()
 
     puts "======================================================"
-    puts "Installing nenv"
+    puts "Installing Node version manager (NVM)"
     puts "======================================================"
-    # install_nenv()
+    install_nvm()
 
     puts "======================================================"
     puts "Installing Android SDK"
@@ -43,7 +43,7 @@ def install
     puts "======================================================"
     puts "Installing Atom packages"
     puts "======================================================"
-    # install_atom_packages()
+    install_atom_packages()
 
     puts "======================================================"
     puts "Symlinking files"
@@ -231,17 +231,8 @@ def install_atom_packages
   run %{apm install seti-ui editorconfig todo-show pigments atom-beautify prettier-atom highlight-selected sort-lines toggle-quotes color-picker linter linter-ui-default linter-eslint}
 end
 
-def install_nenv
-    nenv_path = File.expand_path('~/.nenv')
-    if !Dir.exists?(nenv_path)
-        run %{git clone https://github.com/ryuone/nenv.git ~/.nenv}
-    end
-    run %{export PATH=$PATH:~/.nenv}  # just to make sure
-    run %{nenv rehash}
-    puts "Installing NodeJS 7.4.0"
-    run %{nenv install 7.10.0}
-    puts "Installing NodeJS 6.9.4"
-    run %{nenv install 6.9.4}
-end
+def install_nvm
+  run %{curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash}
 
+end
 install
