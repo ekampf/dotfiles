@@ -1,4 +1,4 @@
-plugins=(git bundler brew gem rbates rvm nvm pip bower capistrano python osx textmate sublime react-native)
+plugins=(yarn git bundler brew gem rbates rvm nvm pip bower capistrano python osx textmate sublime react-native)
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
@@ -17,7 +17,10 @@ COMPLETION_WAITING_DOTS="true"
 
 source $ZSH/oh-my-zsh.sh
 
-# Load NENV
+# Load nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 function rvm_info_for_prompt {
   ruby_version=$(~/.rvm/bin/rvm-prompt)
@@ -28,6 +31,8 @@ function rvm_info_for_prompt {
 function virtualenv_info {
     [ $VIRTUAL_ENV ] && echo '('`basename $VIRTUAL_ENV`') '
 }
+
+export VIRTUAL_ENV_DISABLE_PROMPT=1 # Disable virtualenv changing the prompt so we can control it from here
 
 ZSH_THEME="agnoster"
 
@@ -68,10 +73,10 @@ ZSH_THEME_GIT_PROMPT_NOCACHE=1
 
 # (<branch><branch tracking>|<local status>)
 setopt promptsubst
-archey -c
+archey -c -o
 
 # Prompt
-PROMPT='%{$fg_no_bold[green]%}%n@%m:%~%{$reset_color%}::%{$fg_bold[white]%}$(rvm_info_for_prompt)%{$reset_color%}:$(git_prompt_info)$(git_remote_status)$(git_prompt_status)
+PROMPT='%{$fg_bold[white]%}$(virtualenv_info)%{$reset_color%}%{$fg_no_bold[green]%}%n@%m:%~%{$reset_color%}:%{$fg_bold[white]%}$(nvm_ls current)%{$reset_color%}::%{$fg_bold[white]%}$(rvm_info_for_prompt)%{$reset_color%}:$(git_prompt_info)$(git_remote_status)$(git_prompt_status)
 $ '
 RPROMPT=''
 
@@ -170,6 +175,9 @@ _load_settings() {
   fi
 }
 _load_settings "$HOME/.zsh/configs"
+
+# direnv
+eval "$(direnv hook zsh)"
 
 # added by travis gem
 [ -f /Users/ekampf/.travis/travis.sh ] && source /Users/ekampf/.travis/travis.sh

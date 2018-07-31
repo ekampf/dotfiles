@@ -1,0 +1,3 @@
+layout_venv() {
+  source .venv/bin/activate
+}
