@@ -186,7 +186,6 @@ def install_brew_dependencies
     if !brew_installed?
         run 'ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"'
     end
-    run %{brew tap homebrew/science}
     run %{brew tap caskroom/cask}
     run %{brew tap caskroom/versions}
 
