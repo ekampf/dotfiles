@@ -201,7 +201,7 @@ def install_brew_dependencies
     end
 
     if Ask.confirm("Install essential utils? (dropbox vlc lastpass hipchat slack screenflow, spectacle the-unarchiver)", clear: true, response: false, default: true)
-      run %{brew cask install dropbox vlc lastpass hipchat slack screenflow, spectacle the-unarchiver}
+      run %{brew cask install dropbox vlc lastpass hipchat slack screenflow spectacle the-unarchiver}
     end
 end
 
