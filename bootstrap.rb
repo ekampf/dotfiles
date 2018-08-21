@@ -36,11 +36,6 @@ def install
     install_nvm()
 
     puts "======================================================"
-    puts "Installing Android SDK"
-    puts "======================================================"
-    # install_android_sdk()
-
-    puts "======================================================"
     puts "Installing Atom packages"
     puts "======================================================"
     install_atom_packages()
@@ -208,19 +203,6 @@ end
 def install_pip_dependencies
     run %{pip install -U pip setuptools virtualenv}
     run %{pip install git-sweep pivotal_tools httpie}
-end
-
-def install_android_sdk
-    should_run = Ask.confirm("Update Android SDK?", clear: true, response: false, default: true)
-    return if !should_run
-
-    # Update or install SDK components.
-    # Install platform-tools to get adb.
-    run %{echo y | android update sdk --no-ui --all --filter "tools","platform-tools"}
-    # Install Build Tools (23.0.2 is necessary to build using gradle).
-    run %{echo y | android update sdk --no-ui --all --filter "build-tools","build-tools-23.0.2"}
-    # Install Google Play Services.
-    run %{echo y | android update sdk --no-ui --all --filter "extra-google-google_play_services"}
 end
 
 def install_atom_packages
