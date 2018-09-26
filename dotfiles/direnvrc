@@ -1,3 +1,6 @@
 layout_venv() {
   source .venv/bin/activate
 }
+layout_verchew() {
+  verchew
+}
