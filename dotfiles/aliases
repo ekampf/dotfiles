@@ -110,6 +110,10 @@ alias keditdep='kubectl edit deployment'
 kssh() { kubectl exec $1 -ti -- bash; }
 kssha() { kubectl exec $1 -ti -- /bin/ash; }
 
+# Show all alias related kubernetes
+kalias() { alias | grep 'kubectl' | sed "s/^\([^=]*\)=\(.*\)/\1 => \2/"| sed "s/['|\']//g" | sort; }
+
+
 # ------------------------------------
 # Docker alias and function
 # ------------------------------------
