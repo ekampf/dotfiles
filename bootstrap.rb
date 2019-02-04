@@ -38,7 +38,7 @@ def install
     puts "======================================================"
     puts "Installing Atom packages"
     puts "======================================================"
-    install_atom_packages()
+    # install_atom_packages()
 
     puts "======================================================"
     puts "Symlinking files"
@@ -203,7 +203,7 @@ end
 
 def install_pip_dependencies
     run %{pip install -U pip setuptools virtualenv}
-    run %{pip install git-sweep pivotal_tools httpie}
+    run %{pip install git-sweep httpie}
 end
 
 def install_atom_packages
@@ -214,7 +214,7 @@ def install_atom_packages
 end
 
 def install_nvm
-  run %{curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash}
+  run %{curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash}
 end
 
 install
