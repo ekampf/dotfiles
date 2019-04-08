@@ -1,4 +1,4 @@
-plugins=(yarn git bundler brew gem rbates nvm pip python osx kubectl)
+plugins=(yarn git bundler brew gem nvm pip python osx kubectl)
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
