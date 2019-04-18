@@ -59,12 +59,12 @@ def install
         system %Q{mkdir -p "$HOME/.#{File.dirname(f)}"} if f =~ /\//
 
         target_filename = File.join(ENV['HOME'], ".#{f.sub(/\.erb$/, '')}")
-        puts "Processing: #{f} => #{target_filename}"
-        if File.exist?(target_filename)
+        puts "Processing: #{f} => #{target_filename} - #{File.exist?(target_filename)}"
+        if File.exist?(target_filename) || File.lstat("/Users/eran.kampf/.caprc").symlink?
             if File.identical?(f, target_filename)
                 puts "\tfiles are identical"
             else
-                # should_overwrite = Ask.confirm("File already exists: #{target_filename}. Overwrite it?", clear: true, response: false, default: false)
+                should_overwrite = Ask.confirm("File already exists: #{target_filename}. Overwrite it?", clear: true, response: false, default: false)
 
                 should_overwrite = always_overwrite
                 if !always_overwrite
@@ -75,7 +75,7 @@ def install
 
                 if should_overwrite
                     puts "\tRemoving #{target_filename}"
-                    FileUtils.rm(target_filename)
+                    FileUtils.rm_f(target_filename)
                 else
                     puts "\tSkipping #{target_filename}"
                     next
