@@ -36,6 +36,11 @@ def install
     install_nvm()
 
     puts "======================================================"
+    puts "Installing RVM"
+    puts "======================================================"
+    install_rvm()
+
+    puts "======================================================"
     puts "Installing Atom packages"
     puts "======================================================"
     # install_atom_packages()
@@ -60,7 +65,7 @@ def install
 
         target_filename = File.join(ENV['HOME'], ".#{f.sub(/\.erb$/, '')}")
         puts "Processing: #{f} => #{target_filename} - #{File.exist?(target_filename)}"
-        if File.exist?(target_filename) || File.lstat("/Users/eran.kampf/.caprc").symlink?
+        if File.exist?(target_filename)
             if File.identical?(f, target_filename)
                 puts "\tfiles are identical"
             else
@@ -215,6 +220,10 @@ end
 
 def install_nvm
   run %{curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash}
+end
+
+def install_rvm
+  run %{curl -sSL https://get.rvm.io | bash -s head}
 end
 
 install
