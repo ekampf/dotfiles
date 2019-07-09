@@ -8,7 +8,7 @@ export EDITOR=vim
 export PATH="$HOME/.bin:/usr/local/sbin:$PATH"
 export PATH="$ZSH/bin:$PATH"
 
-export WORKSPACE="$HOME/workspace/"
+export WORKSPACE="$HOME/workspace"
 export GOPATH="$WORKSPACE/gopath/"
 
 export PATH="$PATH:$GOPATH/bin"
