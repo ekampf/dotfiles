@@ -190,7 +190,7 @@ def install_brew_dependencies
     run %{brew tap caskroom/versions}
 
     run %{brew cask install java}
-    run %{brew install ack direnv git watch tree python scipy numpy graphviz scala redis ffmpeg httpie boost curl wget webp libxml2 libyaml archey gnupg gnupg2 carthage swiftlint packer}
+    run %{brew install ack direnv git watch tree python scipy numpy graphviz scala redis ffmpeg httpie boost curl wget webp libxml2 libyaml archey gnupg gnupg2 carthage swiftlint jq terraform}
     run %{brew install kubectx}
 
     if Ask.confirm("Install browsers? (google-chrome google-chrome-canary firefox safari-technology-preview)", clear: true, response: false, default: true)
