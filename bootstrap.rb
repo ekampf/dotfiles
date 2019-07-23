@@ -201,7 +201,7 @@ def install_brew_dependencies
       run %{brew cask install #{dev_tools}}
     end
 
-    tools = "spectacle dropbox vlc lastpass slack the-unarchiver"
+    tools = "spectacle dropbox vlc lastpass slack the-unarchiver gimp go2shell"
     if Ask.confirm("Install essential utils? (#{tools})", clear: true, response: false, default: true)
       run %{brew cask install ${tools}}
     end
