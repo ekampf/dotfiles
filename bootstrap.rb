@@ -186,24 +186,25 @@ def install_brew_dependencies
     if !brew_installed?
         run 'ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"'
     end
-    run %{brew tap caskroom/cask}
-    run %{brew tap caskroom/versions}
-
     run %{brew cask install java}
-    run %{brew install ack direnv git watch tree python scipy numpy graphviz scala redis ffmpeg httpie boost curl wget webp libxml2 libyaml archey gnupg gnupg2 carthage swiftlint jq terraform}
+    run %{brew install ack direnv git watch tree python scipy numpy graphviz scala redis ffmpeg httpie boost curl wget webp libxml2 libyaml archey gnupg gnupg2 carthage swiftlint jq terraform protobuf}
     run %{brew install kubectx}
+    run %{brew install gpg-suite}
 
-    if Ask.confirm("Install browsers? (google-chrome google-chrome-canary firefox safari-technology-preview)", clear: true, response: false, default: true)
-      run %{brew cask install google-chrome google-chrome-canary firefox safari-technology-preview}
+    browsers = "google-chrome firefox"
+    if Ask.confirm("Install browsers? (#{browsers})", clear: true, response: false, default: true)
+      run %{brew cask install #{browsers}}
     end
 
-    if Ask.confirm("Install dev tools? (iterm2 atom tower)", clear: true, response: false, default: true)
-      run %{brew cask install iterm2 atom tower}
+    dev_tools = "iterm2 tower visual-studio-code goland pycharm-ce"
+    if Ask.confirm("Install dev tools? (#{dev_tools})", clear: true, response: false, default: true)
+      run %{brew cask install #{dev_tools}}
     end
 
-    # if Ask.confirm("Install essential utils? (dropbox vlc lastpass hipchat slack screenflow, spectacle the-unarchiver)", clear: true, response: false, default: true)
-    #   run %{brew cask install screenflow}
-    # end
+    tools = "spectacle dropbox vlc lastpass slack the-unarchiver"
+    if Ask.confirm("Install essential utils? (#{tools})", clear: true, response: false, default: true)
+      run %{brew cask install ${tools}}
+    end
 end
 
 def install_pip_dependencies
