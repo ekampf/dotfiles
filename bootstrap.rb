@@ -203,12 +203,12 @@ def install_brew_dependencies
 
     tools = "spectacle dropbox vlc lastpass slack the-unarchiver gimp go2shell zoomus notion"
     if Ask.confirm("Install essential utils? (#{tools})", clear: true, response: false, default: true)
-      run %{brew cask install ${tools}}
+      run %{brew cask install #{tools}}
     end
 
     fun = "boxer"
     if Ask.confirm("Install fun stuff? (#{fun})", clear: true, response: false, default: true)
-      run %{brew cask install ${fun}}
+      run %{brew cask install #{fun}}
     end
 end
 
