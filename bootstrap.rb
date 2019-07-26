@@ -187,7 +187,7 @@ def install_brew_dependencies
         run 'ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"'
     end
     run %{brew cask install java}
-    run %{brew install ack direnv git watch tree python scipy numpy graphviz scala redis ffmpeg httpie boost curl wget webp libxml2 libyaml archey gnupg gnupg2 carthage swiftlint jq terraform protobuf protoc-gen-go}
+    run %{brew install vim ack direnv git watch tree python scipy numpy graphviz scala redis ffmpeg httpie boost curl wget webp libxml2 libyaml archey gnupg gnupg2 carthage swiftlint jq terraform protobuf protoc-gen-go}
     run %{brew install kubectx}
     run %{brew install gpg-suite}
 
@@ -196,14 +196,19 @@ def install_brew_dependencies
       run %{brew cask install #{browsers}}
     end
 
-    dev_tools = "iterm2 vim tower visual-studio-code goland pycharm-ce"
+    dev_tools = "iterm2 tower visual-studio-code goland pycharm-ce gpg-suite docker"
     if Ask.confirm("Install dev tools? (#{dev_tools})", clear: true, response: false, default: true)
       run %{brew cask install #{dev_tools}}
     end
 
-    tools = "spectacle dropbox vlc lastpass slack the-unarchiver gimp go2shell"
+    tools = "spectacle dropbox vlc lastpass slack the-unarchiver gimp go2shell zoomus notion"
     if Ask.confirm("Install essential utils? (#{tools})", clear: true, response: false, default: true)
       run %{brew cask install ${tools}}
+    end
+
+    fun = "boxer"
+    if Ask.confirm("Install fun stuff? (#{fun})", clear: true, response: false, default: true)
+      run %{brew cask install ${fun}}
     end
 end
 
