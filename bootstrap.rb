@@ -41,6 +41,11 @@ def install
     install_rvm()
 
     puts "======================================================"
+    puts "Customize OSX"
+    puts "======================================================"
+    customize_osx()
+
+    puts "======================================================"
     puts "Installing Atom packages"
     puts "======================================================"
     # install_atom_packages()
@@ -230,6 +235,58 @@ end
 
 def install_rvm
   run %{curl -sSL https://get.rvm.io | bash -s head}
+end
+
+def customize_osx
+  ###############################################################################
+  # Finder
+  ###############################################################################
+  run %{defaults write com.apple.finder AppleShowAllFiles YES}
+
+  # Show icons for hard drives, servers, and removable media on the desktop
+  run %{defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true}
+  run %{defaults write com.apple.finder ShowHardDrivesOnDesktop -bool true}
+  run %{defaults write com.apple.finder ShowMountedServersOnDesktop -bool true}
+  run %{defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true}
+
+  # Finder: show all filename extensions
+  run %{defaults write NSGlobalDomain AppleShowAllExtensions -bool true}
+
+  # Finder: show status bar
+  run %{defaults write com.apple.finder ShowStatusBar -bool true}
+
+  # Finder: show path bar
+  run %{defaults write com.apple.finder ShowPathbar -bool true}
+
+  ###############################################################################
+  # iTerm2
+  ###############################################################################
+  # Don’t display the annoying prompt when quitting iTerm
+  run %{defaults write com.googlecode.iterm2 PromptOnQuit -bool false}
+
+  ###############################################################################
+  # Activity Monitor                                                            #
+  ###############################################################################
+  # Show the main window when launching Activity Monitor
+  run %{defaults write com.apple.ActivityMonitor OpenMainWindow -bool true}
+
+  # Visualize CPU usage in the Activity Monitor Dock icon
+  run %{defaults write com.apple.ActivityMonitor IconType -int 5}
+
+  # Show all processes in Activity Monitor
+  run %{defaults write com.apple.ActivityMonitor ShowCategory -int 0}
+
+  # Sort Activity Monitor results by CPU usage
+  run %{defaults write com.apple.ActivityMonitor SortColumn -string "CPUUsage"}
+  run %{defaults write com.apple.ActivityMonitor SortDirection -int 0}
+
+  puts "Restarting apps..."
+  %w(Finder Terminal ).each do |app|
+    run %{sudo killall #{app}}
+  end
+
+  run %{open /System/Library/CoreServices/Finder.app}
+  puts "Done. Note that some of these changes require a logout/restart to take effect."
 end
 
 install
