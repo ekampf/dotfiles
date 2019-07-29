@@ -122,7 +122,7 @@ def process_file(f, target_filename)
         end
     else
         puts "\tSymlinking #{target_filename} => #{f}"
-        FileUtils.ln_s(f, target_filename)
+        FileUtils.ln_s(f, target_filename, force: true)
     end
 end
 
@@ -192,7 +192,7 @@ def install_brew_dependencies
         run 'ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"'
     end
     run %{brew cask install java}
-    run %{brew install vim ack direnv git watch tree python scipy numpy graphviz scala redis ffmpeg httpie boost curl wget webp libxml2 libyaml archey gnupg gnupg2 carthage swiftlint jq terraform protobuf protoc-gen-go}
+    run %{brew install vim ack direnv git watch tree python python3 go scipy numpy graphviz scala redis ffmpeg httpie boost curl wget webp libxml2 libyaml archey gnupg gnupg2 carthage swiftlint jq terraform protobuf protoc-gen-go}
     run %{brew install kubectx}
     run %{brew install gpg-suite}
 
