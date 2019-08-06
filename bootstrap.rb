@@ -195,6 +195,7 @@ def install_brew_dependencies
     run %{brew install vim ack direnv git watch tree python python3 go scipy numpy graphviz scala redis ffmpeg httpie boost curl wget webp libxml2 libyaml archey gnupg gnupg2 carthage swiftlint jq terraform protobuf protoc-gen-go}
     run %{brew install kubectx}
     run %{brew install gpg-suite}
+    run %{brew install libvorbis openal-soft}
 
     browsers = "google-chrome firefox"
     if Ask.confirm("Install browsers? (#{browsers})", clear: true, response: false, default: true)
