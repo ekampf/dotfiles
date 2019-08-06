@@ -142,6 +142,7 @@ bindkey "^Y" accept-and-hold
 bindkey "^N" insert-last-word
 bindkey "\e\e[C" forward-word
 bindkey "\e\e[D" backward-word
+bindkey '^W' backward-kill-word
 bindkey -s "^T" "^[Isudo ^[A" # "t" for "toughguy"
 
 # aliases
