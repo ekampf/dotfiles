@@ -11,7 +11,7 @@ export PATH="$ZSH/bin:$PATH"
 
 export WORKSPACE="$HOME/workspace"
 
-export PATH="$PATH:$GOPATH/bin"
+export PATH="$PATH:$GOPATH/bin:$HOME/go/bin/"
 
 export PATH="$PATH:$HOME/.poetry/bin"
 
