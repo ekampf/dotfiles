@@ -24,6 +24,10 @@ alias ed="$EDITOR"
 alias ved="$VISUAL"
 alias todo='$EDITOR ~/.todo'
 
+# ZSH
+alias zshrc='$EDITOR ~/.zshrc'
+alias zshenv='$EDITOR ~/.zshenv'
+
 # Misc System
 alias e='exit'
 alias brewuu="brew update && brew upgrade"
