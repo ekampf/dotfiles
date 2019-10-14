@@ -41,6 +41,11 @@ def install
     install_rvm()
 
     puts "======================================================"
+    puts "Installing Rust"
+    puts "======================================================"
+    install_rust()
+
+    puts "======================================================"
     puts "Customize OSX"
     puts "======================================================"
     customize_osx()
@@ -227,6 +232,10 @@ end
 
 def install_rvm
   run %{curl -sSL https://get.rvm.io | bash -s head}
+end
+
+def install_rust
+    run %{curl https://sh.rustup.rs -sSf | sh -s -- -v -y}
 end
 
 def customize_osx
