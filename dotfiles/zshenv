@@ -14,7 +14,7 @@ export PATH="$PATH:$GOPATH/bin:$HOME/go/bin/"
 export PATH="$PATH:$HOME/.poetry/bin"
 export PATH="$PATH:$HOME/jetbrains"
 
-export WORKSPACE="$HOME/workspace"
+export WORKSPACE="$HOME/Workspace"
 
 # Fix PIP's annoying "ValueError: unknown locale: UTF-8"
 export LC_ALL=en_US.UTF-8
