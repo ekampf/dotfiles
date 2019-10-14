@@ -69,9 +69,8 @@ def install
             if File.identical?(f, target_filename)
                 puts "\tfiles are identical"
             else
-                should_overwrite = Ask.confirm("File already exists: #{target_filename}. Overwrite it?", clear: true, response: false, default: false)
+                should_overwrite = always_overwrite || Ask.confirm("File already exists: #{target_filename}. Overwrite it?", clear: true, response: false, default: false)
 
-                should_overwrite = always_overwrite
                 if !always_overwrite
                     response = Ask.list("File already exists: #{target_filename}. Overwrite it?", file_options)
                     always_overwrite = true if (file_options[response].to_sym == :always)
@@ -256,6 +255,10 @@ def customize_osx
   ###############################################################################
   # Don’t display the annoying prompt when quitting iTerm
   run %{defaults write com.googlecode.iterm2 PromptOnQuit -bool false}
+  # Specify the preferences directory
+  run %{defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "~/.iterm2"}
+  # Tell iTerm2 to use the custom preferences in the directory
+  run %{defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true}
 
   ###############################################################################
   # Activity Monitor                                                            #
