@@ -232,6 +232,7 @@ end
 
 def install_rvm
   run %{curl -sSL https://get.rvm.io | sh -s head}
+  run %{rvm install ruby --latest}
 end
 
 def install_rust
