@@ -227,11 +227,11 @@ def install_pip_dependencies
 end
 
 def install_nvm
-  run %{curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash}
+  run %{curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | sh}
 end
 
 def install_rvm
-  run %{curl -sSL https://get.rvm.io | bash -s head}
+  run %{curl -sSL https://get.rvm.io | sh -s head}
 end
 
 def install_rust
