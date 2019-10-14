@@ -9,4 +9,4 @@ use_symbol_for_status = true
 truncation_length = 5
 
 [git_branch]
-symbol = "🌱 "
+symbol = "\ue725 "

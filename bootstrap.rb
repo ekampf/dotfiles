@@ -187,7 +187,11 @@ def install_brew_dependencies
         run 'ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"'
     end
     run %{brew cask install java}
+
+    run %{brew tap homebrew/cask-fonts}
+    run %{brew cask install font-hack-nerd-font}
     run %{brew install starship}
+
     run %{brew install vim ack direnv git watch tree python go graphviz ffmpeg httpie boost curl wget webp libxml2 libyaml archey gnupg gnupg2 carthage swiftlint jq terraform protobuf}
     run %{brew install kubectx}
     run %{brew install libvorbis openal-soft}
