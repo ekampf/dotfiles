@@ -36,6 +36,7 @@ alias brewuu="brew update && brew upgrade"
 alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
 
 # Git
+alias gitconfig='$EDITOR ~/.gitconfig'
 alias gl='git pull --prune'
 alias gp='git push origin HEAD'
 alias gd='git diff'
