@@ -75,13 +75,13 @@ def symlink_folders()
 
     if File.exist?(target)
       should_overwrite = always_overwrite
-      if !should_overwrite
+      unless should_overwrite
         response = Ask.list("File already exists: #{target}. Overwrite it?", file_options)
         always_overwrite =  (file_options[response].to_sym == :always)
         should_overwrite = always_overwrite || (file_options[response].to_sym == :yes)
       end
 
-      if !should_overwrite
+      unless should_overwrite
         puts "Skipping #{src}"
         next
       end
@@ -113,25 +113,25 @@ def symlink_files
     target_filename = File.join(ENV['HOME'], ".#{f.sub(/\.erb$/, '')}")
     puts "Processing: #{f} => #{target_filename} - #{File.exist?(target_filename)}"
     if File.exist?(target_filename)
-        if File.identical?(f, target_filename)
-          puts "\tfiles are identical"
-        else
-          should_overwrite = always_overwrite || Ask.confirm("File already exists: #{target_filename}. Overwrite it?", clear: true, response: false, default: false)
+      if File.identical?(f, target_filename)
+        puts "\tfiles are identical"
+      else
+        should_overwrite = always_overwrite || Ask.confirm("File already exists: #{target_filename}. Overwrite it?", clear: true, response: false, default: false)
 
-          if !always_overwrite
-            response = Ask.list("File already exists: #{target_filename}. Overwrite it?", file_options)
-            always_overwrite = true if (file_options[response].to_sym == :always)
-            should_overwrite = always_overwrite || (file_options[response].to_sym == :yes)
-          end
-
-          if should_overwrite
-            puts "\tRemoving #{target_filename}"
-            FileUtils.rm_f(target_filename)
-          else
-            puts "\tSkipping #{target_filename}"
-            next
-          end
+        unless always_overwrite
+          response = Ask.list("File already exists: #{target_filename}. Overwrite it?", file_options)
+          always_overwrite = true if (file_options[response].to_sym == :always)
+          should_overwrite = always_overwrite || (file_options[response].to_sym == :yes)
         end
+
+        if should_overwrite
+          puts "\tRemoving #{target_filename}"
+          FileUtils.rm_f(target_filename)
+        else
+          puts "\tSkipping #{target_filename}"
+          next
+        end
+      end
     end
 
     process_file(src_fullname, target_filename)
@@ -143,8 +143,8 @@ def is_erb?(f)
 end
 
 def process_file(f, target_filename)
-    # ERB - render the erb template to target location
-    # Other - symlink
+  # ERB - render the erb template to target location
+  # Other - symlink
 
   if is_erb?(f)
     puts "\tGenerating #{target_filename}"
@@ -166,7 +166,7 @@ def zsh_installed?
 end
 
 def brew_installed?
-  return !run('which brew').empty?
+  !run('which brew').empty?
 end
 
 def zsh_active?
@@ -182,7 +182,7 @@ def switch_to_zsh
   should_switch = Ask.confirm('Switch to oh-my-zsh??', clear: true, response: false, default: true)
   if should_switch
     puts 'switching to zsh'
-    system %Q{chsh -s `which zsh`}
+    system 'chsh -s `which zsh`'
   end
 end
 
@@ -195,35 +195,12 @@ def install_oh_my_zsh
   should_install = Ask.confirm('Install oh-my-zsh??', clear: true, response: false, default: true)
   if should_install
     puts 'installing oh-my-zsh'
-    system %Q{git clone https://github.com/robbyrussell/oh-my-zsh.git "$HOME/.oh-my-zsh"}
+    system 'git clone https://github.com/robbyrussell/oh-my-zsh.git "$HOME/.oh-my-zsh"'
   end
 end
 
-def iTerm_available_themes
-  Dir['iTerm2/*.itermcolors'].map { |value| File.basename(value, '.itermcolors')} << 'None'
-end
-
-def iTerm_profile_list
-  profiles=Array.new
-  begin
-    profiles <<  %x{ /usr/libexec/PlistBuddy -c "Print :'New Bookmarks':#{profiles.size}:Name" ~/Library/Preferences/com.googlecode.iterm2.plist 2>/dev/null}
-  end while $?.exitstatus==0
-  profiles.pop
-  profiles
-end
-
-def apply_theme_to_iterm_profile_idx(index, color_scheme_path)
-  values = Array.new
-  16.times { |i| values << "Ansi #{i} Color" }
-  values << ['Background Color', 'Bold Color', 'Cursor Color', 'Cursor Text Color', 'Foreground Color', 'Selected Text Color', 'Selection Color']
-  values.flatten.each { |entry| run %{ /usr/libexec/PlistBuddy -c "Delete :'New Bookmarks':#{index}:'#{entry}'" ~/Library/Preferences/com.googlecode.iterm2.plist } }
-
-  run %{ /usr/libexec/PlistBuddy -c "Merge '#{color_scheme_path}' :'New Bookmarks':#{index}" ~/Library/Preferences/com.googlecode.iterm2.plist }
-  run %{ defaults read com.googlecode.iterm2 }
-end
-
 def install_brew_dependencies
-  if !brew_installed?
+  unless brew_installed?
       run 'ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"'
   end
   run %{brew cask install java}
