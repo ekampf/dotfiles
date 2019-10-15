@@ -39,8 +39,10 @@ eval "$(starship init zsh)"
 fpath=(~/.zsh/completion /usr/local/share/zsh/site-functions /usr/local/share/zsh-completions $fpath)
 
 # completion
-autoload -U compinit
+autoload -Uz compinit
 compinit -u
+zstyle ':completion:*' menu select
+zmodload zsh/complist
 
 # load custom executable functions
 for function in ~/.zsh/functions/*; do
