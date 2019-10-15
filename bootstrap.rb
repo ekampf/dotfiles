@@ -228,7 +228,7 @@ def install_brew_dependencies
     run %{brew cask install #{dev_tools}}
   end
 
-  tools = 'spectacle vlc the-unarchiver go2shell zoomus notion'
+  tools = 'spectacle lastpass vlc the-unarchiver go2shell zoomus notion'
   if Ask.confirm("Install essential utils? (#{tools})", clear: true, response: false, default: true)
     run %{brew cask install #{tools}}
   end
