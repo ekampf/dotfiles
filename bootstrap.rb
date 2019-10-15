@@ -50,16 +50,16 @@ def install
     # puts "======================================================"
     # customize_osx()
 
-    # puts "======================================================"
-    # puts "Symlinking files"
-    # puts "======================================================"
-    # symlink_files()
+    puts "======================================================"
+    puts "Symlinking files"
+    puts "======================================================"
+    symlink_files()
     symlink_folders()
 end
 
 def symlink_folders()
   # iterm is a special case
-  folders = Dir.glob('dotfiles/*')
+  folders = Dir.glob('dotfiles/*') - ["dotfiles/oh-my-zsh"]
   folders.select! { |f| File.directory?(f) }
   folders.sort!
 
@@ -94,7 +94,7 @@ def symlink_folders()
 end
 
 def symlink_files
-  files = Dir.glob('dotfiles/*') - %w[bootstrap.rb defaults.yml README.md LICENSE oh-my-zsh .gitignore]
+  files = Dir.glob('dotfiles/*') + Dir.glob('dotfiles/oh-my-zsh/**/*')
   files.reject! { |f| File.directory?(f) }
   puts "Processing:\n "
   files.each { |f| puts "\t#{f}" }
@@ -201,7 +201,7 @@ end
 
 def install_brew_dependencies
   unless brew_installed?
-      run 'ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"'
+    run 'ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"'
   end
   run %{brew cask install java}
 
