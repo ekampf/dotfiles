@@ -1,5 +1,7 @@
 plugins=(yarn git bundler gem nvm pip python osx kubectl)
 
+source $ZSH/oh-my-zsh.sh
+
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
 
@@ -41,8 +43,6 @@ fpath=(~/.zsh/completion /usr/local/share/zsh/site-functions /usr/local/share/zs
 # completion
 autoload -Uz compinit
 compinit -u
-zstyle ':completion:*' menu select
-zmodload zsh/complist
 
 # load custom executable functions
 for function in ~/.zsh/functions/*; do
