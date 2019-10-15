@@ -58,151 +58,149 @@ def install
 end
 
 def symlink_folders()
-    # iterm is a special case
-    folders = Dir.glob('dotfiles/*')
-    folders.select! { |f| File.directory?(f) }
-    folders.sort!
+  # iterm is a special case
+  folders = Dir.glob('dotfiles/*')
+  folders.select! { |f| File.directory?(f) }
+  folders.sort!
 
-    puts "Processing:\n "
+  puts "Processing:\n "
 
-    file_options = %w{yes no always}
-    always_overwrite = false
+  file_options = %w{yes no always}
+  always_overwrite = false
 
-    folders.each do |folder_name|
-        f = folder_name.split('/', 2)[1] # Get rid of the "dotfiles/" prefix
-        src = File.absolute_path(folder_name)
-        target = File.join(ENV['HOME'], ".#{f}")
+  folders.each do |folder_name|
+    f = folder_name.split('/', 2)[1] # Get rid of the "dotfiles/" prefix
+    src = File.absolute_path(folder_name)
+    target = File.join(ENV['HOME'], ".#{f}")
 
-        if File.exist?(target)
-            should_overwrite = always_overwrite
-            if !should_overwrite
-                response = Ask.list("File already exists: #{target}. Overwrite it?", file_options)
-                always_overwrite =  (file_options[response].to_sym == :always)
-                should_overwrite = always_overwrite || (file_options[response].to_sym == :yes)
-            end
+    if File.exist?(target)
+      should_overwrite = always_overwrite
+      if !should_overwrite
+        response = Ask.list("File already exists: #{target}. Overwrite it?", file_options)
+        always_overwrite =  (file_options[response].to_sym == :always)
+        should_overwrite = always_overwrite || (file_options[response].to_sym == :yes)
+      end
 
-            if !should_overwrite
-                puts "Skipping #{src}"
-                next
-            end
-        end
-
-        puts "\tSymlinking #{target} -> #{src}"
-        FileUtils.rm_r(target)
-        FileUtils.ln_s(src, target, force: true)
+      if !should_overwrite
+        puts "Skipping #{src}"
+        next
+      end
     end
+
+    puts "\tSymlinking #{target} -> #{src}"
+    FileUtils.rm_r(target)
+    FileUtils.ln_s(src, target, force: true)
+  end
 end
 
 def symlink_files
-    files = Dir.glob('dotfiles/*') - %w[bootstrap.rb defaults.yml README.md LICENSE oh-my-zsh .gitignore ]
-    files.reject! { |f| File.directory?(f) }
+  files = Dir.glob('dotfiles/*') - %w[bootstrap.rb defaults.yml README.md LICENSE oh-my-zsh .gitignore]
+  files.reject! { |f| File.directory?(f) }
+  puts "Processing:\n "
+  files.each { |f| puts "\t#{f}" }
+  puts
+  puts
 
-    files = get_files_to_process()
-    puts "Processing:\n "
-    files.each { |f| puts "\t#{f}" }
-    puts
-    puts
+  file_options = %w{yes no always}
+  always_overwrite = false
+  files.each do |src_filename|
+    f = src_filename.split('/', 2)[1] # Get rid of the "dotfiles/" prefix
+    src_fullname = File.absolute_path(src_filename)
 
-    file_options = %w{yes no always}
-    always_overwrite = false
-    files.each do |src_filename|
-        f = src_filename.split('/', 2)[1] # Get rid of the "dotfiles/" prefix
-        src_fullname = File.absolute_path(src_filename)
+    puts %Q{mkdir -p "$HOME/.#{File.dirname(f)}"} if f =~ /\//
+    system %Q{mkdir -p "$HOME/.#{File.dirname(f)}"} if f =~ /\//
 
-        puts %Q{mkdir -p "$HOME/.#{File.dirname(f)}"} if f =~ /\//
-        system %Q{mkdir -p "$HOME/.#{File.dirname(f)}"} if f =~ /\//
+    target_filename = File.join(ENV['HOME'], ".#{f.sub(/\.erb$/, '')}")
+    puts "Processing: #{f} => #{target_filename} - #{File.exist?(target_filename)}"
+    if File.exist?(target_filename)
+        if File.identical?(f, target_filename)
+          puts "\tfiles are identical"
+        else
+          should_overwrite = always_overwrite || Ask.confirm("File already exists: #{target_filename}. Overwrite it?", clear: true, response: false, default: false)
 
-        target_filename = File.join(ENV['HOME'], ".#{f.sub(/\.erb$/, '')}")
-        puts "Processing: #{f} => #{target_filename} - #{File.exist?(target_filename)}"
-        if File.exist?(target_filename)
-            if File.identical?(f, target_filename)
-                puts "\tfiles are identical"
-            else
-                should_overwrite = always_overwrite || Ask.confirm("File already exists: #{target_filename}. Overwrite it?", clear: true, response: false, default: false)
+          if !always_overwrite
+            response = Ask.list("File already exists: #{target_filename}. Overwrite it?", file_options)
+            always_overwrite = true if (file_options[response].to_sym == :always)
+            should_overwrite = always_overwrite || (file_options[response].to_sym == :yes)
+          end
 
-                if !always_overwrite
-                    response = Ask.list("File already exists: #{target_filename}. Overwrite it?", file_options)
-                    always_overwrite = true if (file_options[response].to_sym == :always)
-                    should_overwrite = always_overwrite || (file_options[response].to_sym == :yes)
-                end
-
-                if should_overwrite
-                    puts "\tRemoving #{target_filename}"
-                    FileUtils.rm_f(target_filename)
-                else
-                    puts "\tSkipping #{target_filename}"
-                    next
-                end
-            end
+          if should_overwrite
+            puts "\tRemoving #{target_filename}"
+            FileUtils.rm_f(target_filename)
+          else
+            puts "\tSkipping #{target_filename}"
+            next
+          end
         end
-
-        process_file(src_fullname, target_filename)
     end
+
+    process_file(src_fullname, target_filename)
+  end
 end
 
 def is_erb?(f)
-    f.end_with?('.erb')
+  f.end_with?('.erb')
 end
 
 def process_file(f, target_filename)
     # ERB - render the erb template to target location
     # Other - symlink
 
-    if is_erb?(f)
-        puts "\tGenerating #{target_filename}"
-        erb_template = File.read(f)
-        erb = ERB.new(erb_template)
-        erb_rendered = ERB.new(erb_template).result(OpenStruct.new(DEFAULTS).instance_eval { binding })
+  if is_erb?(f)
+    puts "\tGenerating #{target_filename}"
+    erb_template = File.read(f)
+    erb = ERB.new(erb_template)
+    erb_rendered = ERB.new(erb_template).result(OpenStruct.new(DEFAULTS).instance_eval { binding })
 
-        File.open(target_filename, 'w') do |new_file|
-            new_file.write(erb_rendered)
-        end
-    else
-        puts "\tSymlinking #{target_filename} => #{f}"
-        FileUtils.ln_s(f, target_filename, force: true)
+    File.open(target_filename, 'w') do |new_file|
+      new_file.write(erb_rendered)
     end
+  else
+    puts "\tSymlinking #{target_filename} => #{f}"
+    FileUtils.ln_s(f, target_filename, force: true)
+  end
 end
 
 def zsh_installed?
-    File.exist?(File.join(ENV['HOME'], '.oh-my-zsh'))
+  File.exist?(File.join(ENV['HOME'], '.oh-my-zsh'))
 end
 
 def brew_installed?
-    return !run('which brew').empty?
+  return !run('which brew').empty?
 end
 
 def zsh_active?
-    ENV['SHELL'] =~ /zsh/
+  ENV['SHELL'] =~ /zsh/
 end
 
 def switch_to_zsh
-    if zsh_active?
-        puts 'using zsh'
-        return
-    end
+  if zsh_active?
+    puts 'using zsh'
+    return
+  end
 
-    should_switch = Ask.confirm('Switch to oh-my-zsh??', clear: true, response: false, default: true)
-    if should_switch
-        puts 'switching to zsh'
-        system %Q{chsh -s `which zsh`}
-    end
+  should_switch = Ask.confirm('Switch to oh-my-zsh??', clear: true, response: false, default: true)
+  if should_switch
+    puts 'switching to zsh'
+    system %Q{chsh -s `which zsh`}
+  end
 end
 
 def install_oh_my_zsh
-    if zsh_installed?
-        puts 'found ~/.oh-my-zsh'
-        return
-    end
+  if zsh_installed?
+    puts 'found ~/.oh-my-zsh'
+    return
+  end
 
-    should_install = Ask.confirm('Install oh-my-zsh??', clear: true, response: false, default: true)
-    if should_install
-        puts 'installing oh-my-zsh'
-        system %Q{git clone https://github.com/robbyrussell/oh-my-zsh.git "$HOME/.oh-my-zsh"}
-    end
+  should_install = Ask.confirm('Install oh-my-zsh??', clear: true, response: false, default: true)
+  if should_install
+    puts 'installing oh-my-zsh'
+    system %Q{git clone https://github.com/robbyrussell/oh-my-zsh.git "$HOME/.oh-my-zsh"}
+  end
 end
 
 def iTerm_available_themes
-   Dir['iTerm2/*.itermcolors'].map { |value| File.basename(value, '.itermcolors')} << 'None'
+  Dir['iTerm2/*.itermcolors'].map { |value| File.basename(value, '.itermcolors')} << 'None'
 end
 
 def iTerm_profile_list
@@ -225,43 +223,43 @@ def apply_theme_to_iterm_profile_idx(index, color_scheme_path)
 end
 
 def install_brew_dependencies
-    if !brew_installed?
-        run 'ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"'
-    end
-    run %{brew cask install java}
+  if !brew_installed?
+      run 'ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"'
+  end
+  run %{brew cask install java}
 
-    run %{brew tap homebrew/cask-fonts}
-    run %{brew cask install font-hack-nerd-font}
-    run %{brew install starship}
+  run %{brew tap homebrew/cask-fonts}
+  run %{brew cask install font-hack-nerd-font}
+  run %{brew install starship}
 
-    run %{brew install vim ack direnv git watch tree python go graphviz ffmpeg httpie boost curl wget webp libxml2 libyaml archey carthage swiftlint jq terraform protobuf}
-    run %{brew install kubectx}
-    run %{brew install libvorbis openal-soft}
+  run %{brew install vim ack direnv git watch tree python go graphviz ffmpeg httpie boost curl wget webp libxml2 libyaml archey carthage swiftlint jq terraform protobuf}
+  run %{brew install kubectx}
+  run %{brew install libvorbis openal-soft}
 
-    browsers = 'google-chrome firefox'
-    if Ask.confirm("Install browsers? (#{browsers})", clear: true, response: false, default: true)
-      run %{brew cask install #{browsers}}
-    end
+  browsers = 'google-chrome firefox'
+  if Ask.confirm("Install browsers? (#{browsers})", clear: true, response: false, default: true)
+    run %{brew cask install #{browsers}}
+  end
 
-    dev_tools = 'iterm2 tower visual-studio-code jetbrains-toolbox docker'
-    if Ask.confirm("Install dev tools? (#{dev_tools})", clear: true, response: false, default: true)
-      run %{brew cask install #{dev_tools}}
-    end
+  dev_tools = 'iterm2 tower visual-studio-code jetbrains-toolbox docker'
+  if Ask.confirm("Install dev tools? (#{dev_tools})", clear: true, response: false, default: true)
+    run %{brew cask install #{dev_tools}}
+  end
 
-    tools = 'spectacle vlc the-unarchiver go2shell zoomus notion'
-    if Ask.confirm("Install essential utils? (#{tools})", clear: true, response: false, default: true)
-      run %{brew cask install #{tools}}
-    end
+  tools = 'spectacle vlc the-unarchiver go2shell zoomus notion'
+  if Ask.confirm("Install essential utils? (#{tools})", clear: true, response: false, default: true)
+    run %{brew cask install #{tools}}
+  end
 
-    fun = 'boxer'
-    if Ask.confirm("Install fun stuff? (#{fun})", clear: true, response: false, default: true)
-      run %{brew cask install #{fun}}
-    end
+  fun = 'boxer'
+  if Ask.confirm("Install fun stuff? (#{fun})", clear: true, response: false, default: true)
+    run %{brew cask install #{fun}}
+  end
 end
 
 def install_pip_dependencies
-    run %{pip3 install -U pip setuptools virtualenv}
-    run %{pip3 install git-sweep httpie}
+  run %{pip3 install -U pip setuptools virtualenv}
+  run %{pip3 install git-sweep httpie}
 end
 
 def install_nvm
@@ -274,7 +272,7 @@ def install_rvm
 end
 
 def install_rust
-    run %{curl https://sh.rustup.rs -sSf | sh -s -- -v -y}
+  run %{curl https://sh.rustup.rs -sSf | sh -s -- -v -y}
 end
 
 def customize_osx
