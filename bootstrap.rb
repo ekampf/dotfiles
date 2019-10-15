@@ -14,45 +14,89 @@ def run(cmd)
 end
 
 def install
-    puts "======================================================"
-    puts "Setting up ZSH"
-    puts "======================================================"
-    install_oh_my_zsh()
-    switch_to_zsh()
+    # puts "======================================================"
+    # puts "Setting up ZSH"
+    # puts "======================================================"
+    # install_oh_my_zsh()
+    # switch_to_zsh()
 
-    puts "======================================================"
-    puts "Installing Homebrew deprendencies"
-    puts "======================================================"
-    install_brew_dependencies()
+    # puts "======================================================"
+    # puts "Installing Homebrew deprendencies"
+    # puts "======================================================"
+    # install_brew_dependencies()
 
-    puts "======================================================"
-    puts "Installing some pips"
-    puts "======================================================"
-    install_pip_dependencies()
+    # puts "======================================================"
+    # puts "Installing some pips"
+    # puts "======================================================"
+    # install_pip_dependencies()
 
-    puts "======================================================"
-    puts "Installing Node version manager (NVM)"
-    puts "======================================================"
-    install_nvm()
+    # puts "======================================================"
+    # puts "Installing Node version manager (NVM)"
+    # puts "======================================================"
+    # install_nvm()
 
-    puts "======================================================"
-    puts "Installing RVM"
-    puts "======================================================"
-    install_rvm()
+    # puts "======================================================"
+    # puts "Installing RVM"
+    # puts "======================================================"
+    # install_rvm()
 
-    puts "======================================================"
-    puts "Installing Rust"
-    puts "======================================================"
-    install_rust()
+    # puts "======================================================"
+    # puts "Installing Rust"
+    # puts "======================================================"
+    # install_rust()
 
-    puts "======================================================"
-    puts "Customize OSX"
-    puts "======================================================"
-    customize_osx()
+    # puts "======================================================"
+    # puts "Customize OSX"
+    # puts "======================================================"
+    # customize_osx()
 
-    puts "======================================================"
-    puts "Symlinking files"
-    puts "======================================================"
+    # puts "======================================================"
+    # puts "Symlinking files"
+    # puts "======================================================"
+    # symlink_files()
+    symlink_folders()
+end
+
+def symlink_folders()
+    # iterm is a special case
+    folders = Dir.glob("dotfiles/*")
+    folders.select! { |f| File.directory?(f) }
+    folders.sort!
+
+    puts "Processing:\n "
+
+    file_options = %w{yes no always}
+    always_overwrite = false
+
+    folders.each do |folder_name|
+        f = folder_name.split("/", 2)[1] # Get rid of the "dotfiles/" prefix
+        src = File.absolute_path(folder_name)
+        target = File.join(ENV['HOME'], ".#{f}")
+
+        if File.exist?(target)
+            should_overwrite = always_overwrite
+            if !should_overwrite
+                response = Ask.list("File already exists: #{target}. Overwrite it?", file_options)
+                always_overwrite =  (file_options[response].to_sym == :always)
+                should_overwrite = always_overwrite || (file_options[response].to_sym == :yes)
+            end
+
+            if !should_overwrite
+                puts "Skipping #{src}"
+                next
+            end
+        end
+
+        puts "\tSymlinking #{target} -> #{src}"
+        FileUtils.rm_r(target)
+        FileUtils.ln_s(src, target, force: true)
+    end
+end
+
+def symlink_files
+    files = Dir.glob("dotfiles/*") - %w[bootstrap.rb defaults.yml README.md LICENSE oh-my-zsh .gitignore ]
+    files.reject! { |f| File.directory?(f) }
+
     files = get_files_to_process()
     puts "Processing:\n "
     files.each { |f| puts "\t#{f}" }
@@ -79,7 +123,7 @@ def install
                 if !always_overwrite
                     response = Ask.list("File already exists: #{target_filename}. Overwrite it?", file_options)
                     always_overwrite = true if (file_options[response].to_sym == :always)
-                    should_overwrite = always_overwrite or response == 1
+                    should_overwrite = always_overwrite || (file_options[response].to_sym == :yes)
                 end
 
                 if should_overwrite
@@ -94,12 +138,6 @@ def install
 
         process_file(src_fullname, target_filename)
     end
-end
-
-def get_files_to_process
-    files = Dir.glob("dotfiles/**/*") - %w[bootstrap.rb defaults.yml README.md LICENSE oh-my-zsh .gitignore ]
-    files.reject! { |f| File.directory?(f) }
-    files
 end
 
 def is_erb?(f)
@@ -232,7 +270,7 @@ end
 
 def install_rvm
   run %{curl -sSL https://get.rvm.io | sh -s head}
-  run %{rvm install ruby --latest}
+  puts "RVM Installed! Run `rvm install ruby --latest` in a new terminal window to install latest Ruby"
 end
 
 def install_rust
