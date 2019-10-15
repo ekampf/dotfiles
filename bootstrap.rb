@@ -305,7 +305,7 @@ def customize_osx
   run %{defaults write com.apple.ActivityMonitor SortDirection -int 0}
 
   puts 'Restarting apps...'
-  %w(Finder Terminal ).each do |app|
+  %w(Finder).each do |app|
     run %{sudo killall #{app}}
   end
 
