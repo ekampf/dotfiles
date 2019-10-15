@@ -57,9 +57,11 @@ def install
   symlink_folders
 end
 
+FOLDERS_NOT_TO_SYMLINK = ["dotfiles/oh-my-zsh", "dotfiles/ssh"]
+
 def symlink_folders()
   # iterm is a special case
-  folders = Dir.glob('dotfiles/*') - ["dotfiles/oh-my-zsh"]
+  folders = Dir.glob('dotfiles/*') - FOLDERS_NOT_TO_SYMLINK
   folders.select! { |f| File.directory?(f) }
   folders.sort!
 
@@ -94,7 +96,10 @@ def symlink_folders()
 end
 
 def symlink_files
-  files = Dir.glob('dotfiles/*') + Dir.glob('dotfiles/oh-my-zsh/**/*')
+  files = Dir.glob('dotfiles/*')
+  FOLDERS_NOT_TO_SYMLINK.each { |f| 
+    files = files + Dir.glob(f + '/**/*')
+  }
   files.reject! { |f| File.directory?(f) }
   puts "Processing:\n "
   files.each { |f| puts "\t#{f}" }
