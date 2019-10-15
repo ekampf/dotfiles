@@ -1,3 +1,5 @@
 defaults.yml
 vendor
 /.idea
+/dotfiles/ssh/id_rsa
+/dotfiles/ssh/id_rsa.pub
