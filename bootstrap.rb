@@ -55,6 +55,10 @@ def install
   puts "======================================================"
   symlink_files
   symlink_folders
+
+  puts "======================================================"
+  puts "Done!"
+  puts "======================================================"
 end
 
 FOLDERS_NOT_TO_SYMLINK = ["dotfiles/oh-my-zsh", "dotfiles/ssh"]
@@ -90,7 +94,7 @@ def symlink_folders()
     end
 
     puts "\tSymlinking #{target} -> #{src}"
-    FileUtils.rm_r(target)
+    FileUtils.rm_r(target) if File.directory?(target)
     FileUtils.ln_s(src, target, force: true)
   end
 end
