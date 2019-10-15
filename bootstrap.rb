@@ -6,7 +6,7 @@ require 'fileutils'
 require 'yaml'
 require 'inquirer'
 
-DEFAULTS = File.exist?("defaults.yml") ? YAML::load_file("defaults.yml") : {}
+DEFAULTS = File.exist?('defaults.yml') ? YAML::load_file('defaults.yml') : {}
 
 def run(cmd)
   puts "[Running] #{cmd}"
@@ -59,7 +59,7 @@ end
 
 def symlink_folders()
     # iterm is a special case
-    folders = Dir.glob("dotfiles/*")
+    folders = Dir.glob('dotfiles/*')
     folders.select! { |f| File.directory?(f) }
     folders.sort!
 
@@ -69,7 +69,7 @@ def symlink_folders()
     always_overwrite = false
 
     folders.each do |folder_name|
-        f = folder_name.split("/", 2)[1] # Get rid of the "dotfiles/" prefix
+        f = folder_name.split('/', 2)[1] # Get rid of the "dotfiles/" prefix
         src = File.absolute_path(folder_name)
         target = File.join(ENV['HOME'], ".#{f}")
 
@@ -94,7 +94,7 @@ def symlink_folders()
 end
 
 def symlink_files
-    files = Dir.glob("dotfiles/*") - %w[bootstrap.rb defaults.yml README.md LICENSE oh-my-zsh .gitignore ]
+    files = Dir.glob('dotfiles/*') - %w[bootstrap.rb defaults.yml README.md LICENSE oh-my-zsh .gitignore ]
     files.reject! { |f| File.directory?(f) }
 
     files = get_files_to_process()
@@ -106,7 +106,7 @@ def symlink_files
     file_options = %w{yes no always}
     always_overwrite = false
     files.each do |src_filename|
-        f = src_filename.split("/", 2)[1] # Get rid of the "dotfiles/" prefix
+        f = src_filename.split('/', 2)[1] # Get rid of the "dotfiles/" prefix
         src_fullname = File.absolute_path(src_filename)
 
         puts %Q{mkdir -p "$HOME/.#{File.dirname(f)}"} if f =~ /\//
@@ -141,7 +141,7 @@ def symlink_files
 end
 
 def is_erb?(f)
-    f.end_with?(".erb")
+    f.end_with?('.erb')
 end
 
 def process_file(f, target_filename)
@@ -164,39 +164,39 @@ def process_file(f, target_filename)
 end
 
 def zsh_installed?
-    File.exist?(File.join(ENV['HOME'], ".oh-my-zsh"))
+    File.exist?(File.join(ENV['HOME'], '.oh-my-zsh'))
 end
 
 def brew_installed?
-    return !run("which brew").empty?
+    return !run('which brew').empty?
 end
 
 def zsh_active?
-    ENV["SHELL"] =~ /zsh/
+    ENV['SHELL'] =~ /zsh/
 end
 
 def switch_to_zsh
     if zsh_active?
-        puts "using zsh"
+        puts 'using zsh'
         return
     end
 
-    should_switch = Ask.confirm("Switch to oh-my-zsh??", clear: true, response: false, default: true)
+    should_switch = Ask.confirm('Switch to oh-my-zsh??', clear: true, response: false, default: true)
     if should_switch
-        puts "switching to zsh"
+        puts 'switching to zsh'
         system %Q{chsh -s `which zsh`}
     end
 end
 
 def install_oh_my_zsh
     if zsh_installed?
-        puts "found ~/.oh-my-zsh"
+        puts 'found ~/.oh-my-zsh'
         return
     end
 
-    should_install = Ask.confirm("Install oh-my-zsh??", clear: true, response: false, default: true)
+    should_install = Ask.confirm('Install oh-my-zsh??', clear: true, response: false, default: true)
     if should_install
-        puts "installing oh-my-zsh"
+        puts 'installing oh-my-zsh'
         system %Q{git clone https://github.com/robbyrussell/oh-my-zsh.git "$HOME/.oh-my-zsh"}
     end
 end
@@ -238,22 +238,22 @@ def install_brew_dependencies
     run %{brew install kubectx}
     run %{brew install libvorbis openal-soft}
 
-    browsers = "google-chrome firefox"
+    browsers = 'google-chrome firefox'
     if Ask.confirm("Install browsers? (#{browsers})", clear: true, response: false, default: true)
       run %{brew cask install #{browsers}}
     end
 
-    dev_tools = "iterm2 tower visual-studio-code jetbrains-toolbox docker"
+    dev_tools = 'iterm2 tower visual-studio-code jetbrains-toolbox docker'
     if Ask.confirm("Install dev tools? (#{dev_tools})", clear: true, response: false, default: true)
       run %{brew cask install #{dev_tools}}
     end
 
-    tools = "spectacle vlc the-unarchiver go2shell zoomus notion"
+    tools = 'spectacle vlc the-unarchiver go2shell zoomus notion'
     if Ask.confirm("Install essential utils? (#{tools})", clear: true, response: false, default: true)
       run %{brew cask install #{tools}}
     end
 
-    fun = "boxer"
+    fun = 'boxer'
     if Ask.confirm("Install fun stuff? (#{fun})", clear: true, response: false, default: true)
       run %{brew cask install #{fun}}
     end
@@ -270,7 +270,7 @@ end
 
 def install_rvm
   run %{curl -sSL https://get.rvm.io | sh -s head}
-  puts "RVM Installed! Run `rvm install ruby --latest` in a new terminal window to install latest Ruby"
+  puts 'RVM Installed! Run `rvm install ruby --latest` in a new terminal window to install latest Ruby'
 end
 
 def install_rust
@@ -324,13 +324,13 @@ def customize_osx
   run %{defaults write com.apple.ActivityMonitor SortColumn -string "CPUUsage"}
   run %{defaults write com.apple.ActivityMonitor SortDirection -int 0}
 
-  puts "Restarting apps..."
+  puts 'Restarting apps...'
   %w(Finder Terminal ).each do |app|
     run %{sudo killall #{app}}
   end
 
   run %{open /System/Library/CoreServices/Finder.app}
-  puts "Done. Note that some of these changes require a logout/restart to take effect."
+  puts 'Done. Note that some of these changes require a logout/restart to take effect.'
 end
 
 install
