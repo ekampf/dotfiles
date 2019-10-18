@@ -18,7 +18,7 @@ Install required gems:
 
 Run the bootstrap script:
 
-    ./bootstrap.rb
+    bundle exec ruby bootstrap.rb
 
 #### Personalize
 
