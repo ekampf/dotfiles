@@ -10,3 +10,11 @@ truncation_length = 5
 
 [git_branch]
 symbol = "\ue725 "
+
+[kubernetes]
+symbol = "⛵ "
+style = "dim green"
+disabled = false
+
+[package]
+symbol = "🎁 "
