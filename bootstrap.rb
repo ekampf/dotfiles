@@ -210,7 +210,7 @@ end
 
 def install_brew_dependencies
   unless brew_installed?
-    run 'ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"'
+    run '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"'
   end
   run %{brew cask install java}
 
@@ -218,7 +218,7 @@ def install_brew_dependencies
   run %{brew cask install font-hack-nerd-font}
   run %{brew install starship}
 
-  run %{brew install vim ack direnv git watch tree python go graphviz ffmpeg httpie boost curl wget webp libxml2 libyaml archey carthage swiftlint jq terraform protobuf}
+  run %{brew install vim ack direnv git watch tree python go graphviz ffmpeg httpie boost curl wget webp libxml2 libyaml archey carthage jq terraform protobuf}
   run %{brew install kubectx}
   run %{brew install libvorbis openal-soft}
 
@@ -227,12 +227,12 @@ def install_brew_dependencies
     run %{brew cask install #{browsers}}
   end
 
-  dev_tools = 'iterm2 tower visual-studio-code jetbrains-toolbox docker'
+  dev_tools = 'iterm2 tower docker'
   if Ask.confirm("Install dev tools? (#{dev_tools})", clear: true, response: false, default: true)
     run %{brew cask install #{dev_tools}}
   end
 
-  tools = 'spectacle lastpass vlc the-unarchiver go2shell zoomus notion'
+  tools = 'spectacle lastpass vlc the-unarchiver zoomus notion'
   if Ask.confirm("Install essential utils? (#{tools})", clear: true, response: false, default: true)
     run %{brew cask install #{tools}}
   end
