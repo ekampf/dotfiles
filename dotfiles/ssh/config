@@ -20,4 +20,4 @@ Host ec2-*.*.compute.amazonaws.com
   LogLevel QUIET
 
 Host github.com
-  IdentityFile ~/.ssh/id_rsa
+  IdentityFile ~/.ssh/id_ed25519
