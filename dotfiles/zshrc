@@ -132,6 +132,11 @@ _load_settings "$HOME/.zsh/configs"
 # direnv
 eval "$(direnv hook zsh)"
 
+# pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+
+
 # added by travis gem
 [ -f /Users/ekampf/.travis/travis.sh ] && source /Users/ekampf/.travis/travis.sh
 
