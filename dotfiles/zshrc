@@ -140,6 +140,9 @@ if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
 fi
 
+# Init Zoxide
+eval "$(zoxide init zsh)"
+
 # added by travis gem
 [ -f /Users/ekampf/.travis/travis.sh ] && source /Users/ekampf/.travis/travis.sh
 

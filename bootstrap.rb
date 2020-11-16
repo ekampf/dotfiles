@@ -218,7 +218,7 @@ def install_brew_dependencies
   run %{brew cask install font-hack-nerd-font}
   run %{brew install starship}
 
-  run %{brew install vim ack direnv git watch tree zlib python pyenv go graphviz ffmpeg httpie boost curl wget webp libxml2 libyaml archey carthage jq terraform protobuf kubectx fzf}
+  run %{brew install vim ack direnv git watch tree zlib python pyenv go graphviz ffmpeg httpie boost curl wget webp libxml2 libyaml archey carthage jq terraform protobuf kubectx fzf zoxide}
   run %{brew install libvorbis openal-soft}
 
   puts "Installing Google Cloud SDK..."
