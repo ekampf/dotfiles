@@ -174,5 +174,8 @@ dalias() { alias | grep 'docker' | sed "s/^\([^=]*\)=\(.*\)/\1 => \2/"| sed "s/[
 # Bash into running container
 dbash() { docker exec -it $(docker ps -aqf "name=$1") bash; }
 
+# ash into running container
+dash() { docker exec -it $(docker ps -aqf "name=$1") ash; }
+
 # Include custom aliases
 [[ -f ~/.aliases.local ]] && source ~/.aliases.local
