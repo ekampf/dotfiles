@@ -13,6 +13,7 @@ export PATH="$ZSH/bin:$PATH"
 export PATH="$PATH:$GOPATH/bin:$HOME/go/bin/"
 export PATH="$PATH:$HOME/.poetry/bin"
 export PATH="$PATH:$HOME/jetbrains"
+export PATH="$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin"
 
 export WORKSPACE="$HOME/Workspace"
 

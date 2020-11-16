@@ -3,3 +3,4 @@ vendor
 /.idea
 /dotfiles/ssh/id_rsa
 /dotfiles/ssh/id_rsa.pub
+/dotfiles/config/gcloud
