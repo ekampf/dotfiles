@@ -212,15 +212,18 @@ def install_brew_dependencies
   unless brew_installed?
     run '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"'
   end
-  run %{brew cask install java}
 
+  puts "Installing basic homebrew packages..."
   run %{brew tap homebrew/cask-fonts}
   run %{brew cask install font-hack-nerd-font}
   run %{brew install starship}
 
-  run %{brew install vim ack direnv git watch tree python go graphviz ffmpeg httpie boost curl wget webp libxml2 libyaml archey carthage jq terraform protobuf}
-  run %{brew install kubectx}
+  run %{brew install vim ack direnv git watch tree zlib python pyenv go graphviz ffmpeg httpie boost curl wget webp libxml2 libyaml archey carthage jq terraform protobuf kubectx}
   run %{brew install libvorbis openal-soft}
+
+  puts "Installing Google Cloud SDK..."
+  run %{brew install google-cloud-sdk}
+  run %{gcloud components install docker-credential-gcr cloud-build-local kustomize beta}
 
   browsers = 'google-chrome firefox'
   if Ask.confirm("Install browsers? (#{browsers})", clear: true, response: false, default: true)
