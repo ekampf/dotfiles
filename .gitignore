@@ -4,3 +4,5 @@ vendor
 /dotfiles/ssh/id_rsa
 /dotfiles/ssh/id_rsa.pub
 /dotfiles/config/gcloud
+/dotfiles/config/configstore/update-notifier-npm.json
+/dotfiles/config/configstore/nodemon.json
