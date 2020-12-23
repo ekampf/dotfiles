@@ -216,9 +216,7 @@ def install_brew_dependencies
   puts "Installing basic homebrew packages..."
   run %{brew tap homebrew/cask-fonts}
   run %{brew cask install font-hack-nerd-font}
-  run %{brew install starship}
-
-  run %{brew install vim ack direnv git watch tree zlib python pyenv go graphviz ffmpeg httpie boost curl wget webp libxml2 libyaml archey carthage jq terraform protobuf kubectx fzf zoxide}
+  run %{brew install starship flycut vim ack direnv git watch tree zlib python pyenv go graphviz ffmpeg httpie boost curl wget webp libxml2 libyaml archey carthage jq terraform protobuf kubectx fzf zoxide}
   run %{brew install libvorbis openal-soft}
 
   puts "Installing Google Cloud SDK..."
@@ -262,7 +260,7 @@ end
 
 def install_rust
   run %{curl https://sh.rustup.rs -sSf | sh -s -- -v -y}
-  run %{cargo install bat exa dust hyperfine ytop bandwhich procs}
+  run %{cargo install bat exa dust hyperfine ytop bandwhich procs gping}
 end
 
 def customize_osx
