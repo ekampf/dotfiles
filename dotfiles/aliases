@@ -53,6 +53,7 @@ alias glog='git log --color --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%
 
 alias pushstg='git push --force origin develop:staging'
 alias pushprod='git push --force origin develop:master && git push --force origin develop:sec'
+alias pushprodonly='git push --force origin develop:master'
 
 alias gitt='gittower .'
 alias gitsweep='git-sweep preview'
