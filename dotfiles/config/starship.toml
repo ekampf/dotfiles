@@ -1,15 +1,26 @@
 add_newline = false
 
 [character]
-symbol = "➜"
+success_symbol = "➜"
 error_symbol = "✗"
-use_symbol_for_status = true
 
 [directory]
 truncation_length = 5
 
 [git_branch]
 symbol = "\ue725 "
+
+[git_status]
+conflicted = "🏳"
+ahead = "🏎💨"
+behind = "😰"
+diverged = "😵"
+untracked = "🤷‍"
+stashed = "📦"
+modified = "📝"
+staged = '[++\($count\)](green)'
+renamed = "👅"
+deleted = "🗑"
 
 [kubernetes]
 symbol = "⛵ "
