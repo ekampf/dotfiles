@@ -21,9 +21,6 @@ export WORKSPACE="$HOME/Workspace"
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
-export ANDROID_HOME="/usr/local/opt/android-sdk"
-export PATH="$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools"
-
 # Pipenv
 export PIPENV_VENV_IN_PROJECT=1
 
