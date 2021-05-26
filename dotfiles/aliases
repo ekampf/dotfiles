@@ -96,6 +96,9 @@ alias pt='pivotal_tools'
 alias ptbug='pivotal_tools create bug'
 alias ptf='pivotal_tools create feature'
 
+# jq
+alias jqmsg="jq -R 'fromjson? | .message'"
+
 # ------------------------------------
 # Kubernetes aliases
 # ------------------------------------
