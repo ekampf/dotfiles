@@ -14,6 +14,7 @@ export PATH="$PATH:$GOPATH/bin:$HOME/go/bin/"
 export PATH="$PATH:$HOME/.poetry/bin"
 export PATH="$PATH:$HOME/jetbrains"
 export PATH="$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin"
+export PATH="${PATH}:${HOME}/.krew/bin"
 
 export WORKSPACE="$HOME/Workspace"
 
@@ -23,6 +24,9 @@ export LANG=en_US.UTF-8
 
 # Pipenv
 export PIPENV_VENV_IN_PROJECT=1
+
+# Kubetail
+export KUBETAIL_JQ_SELECTOR='.message + " - " + .exc_msg + " - " + .exc_info'
 
 # Local config
 [[ -f ~/.zshenv.local ]] && source ~/.zshenv.local
