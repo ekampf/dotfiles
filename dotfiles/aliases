@@ -97,7 +97,8 @@ alias ptbug='pivotal_tools create bug'
 alias ptf='pivotal_tools create feature'
 
 # jq
-alias jqmsg="jq -R 'fromjson? | .message'"
+alias jqmsg="jq -R 'fromjson? | .ts + \" - \" + .message'"
+alias jqopa="jq '.time + \" - \" + .msg + \" - \" + .req_method + \" - \" + .req_path + \" - \" + (.resp_duration|tostring)'"
 
 # ------------------------------------
 # Kubernetes aliases
