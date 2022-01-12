@@ -1,6 +1,36 @@
 layout_venv() {
   source .venv/bin/activate
 }
+
 layout_verchew() {
+  if ! command -v verchew 1>/dev/null 2>&1; then
+    log_error "Verchew not found. Please install it first."
+    exit 2
+  fi
+
   verchew
 }
+
+layout_poetry() {
+  if ! command -v poetry 1>/dev/null 2>&1; then
+    log_error "Poetry not found. Please install it first."
+    exit 2
+  fi
+
+  if [[ ! -f pyproject.toml ]]; then
+    log_error "No pyproject.toml found. Use \`poetry new\` or \`poetry init\` to create one first."
+    exit 2
+  fi
+
+  VIRTUAL_ENV=$(poetry env list --full-path | cut -d' ' -f1 2>/dev/null; true)
+
+  if [[ -z $VIRTUAL_ENV || ! -d $VIRTUAL_ENV/bin ]]; then
+    poetry install
+    VIRTUAL_ENV=$(poetry env list --full-path | cut -d' ' -f1)
+  fi
+
+  PATH_add "$VIRTUAL_ENV/bin"
+  export POETRY_ACTIVE=1
+  export VIRTUAL_ENV
+}
+
