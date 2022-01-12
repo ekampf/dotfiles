@@ -1,10 +1,22 @@
 # Unix
-alias cat=bat
 alias ls=exa
 
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
+
+# Switch default tools with rust
+alias cat="bat"
+alias ls="exa"
+alias find="fd"
+alias grep="rg"
+alias du="dust"
+alias time="hyperfine"
+alias cloc="tokei"
+alias ps="procs"
+alias sed="sd"
+alias top="btm"
+alias htop="btm"
 
 alias tlf="tail -f"
 alias l='ls'

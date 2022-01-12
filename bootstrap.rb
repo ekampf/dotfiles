@@ -260,7 +260,7 @@ end
 
 def install_rust
   run %{curl https://sh.rustup.rs -sSf | sh -s -- -v -y}
-  run %{cargo install bat exa dust hyperfine ytop bandwhich procs gping}
+  run %{cargo install bat exa du-dust fd-find ripgrep hyperfine tokei sd ytop bandwhich procs gping}
 end
 
 def customize_osx
