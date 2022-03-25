@@ -52,7 +52,7 @@ load-nvmrc
 ZSH_THEME="agnoster"
 
 setopt promptsubst
-archey -c -o
+archey
 
 eval "$(starship init zsh)"
 

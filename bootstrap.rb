@@ -233,7 +233,7 @@ def install_brew_dependencies
     run %{brew install --cask #{dev_tools}}
   end
 
-  tools = 'spectacle vlc the-unarchiver zoomus notion'
+  tools = 'spectacle vlc the-unarchiver'
   if Ask.confirm("Install essential utils? (#{tools})", clear: true, response: false, default: true)
     run %{brew install --cask #{tools}}
   end
@@ -260,7 +260,6 @@ end
 
 def install_rust
   run %{curl https://sh.rustup.rs -sSf | sh -s -- -v -y}
-  run %{source ~/.zshrc}
   run %{cargo install bat exa du-dust fd-find ripgrep hyperfine tokei sd ytop bandwhich procs gping}
 end
 

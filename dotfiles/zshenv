@@ -30,3 +30,4 @@ export KUBETAIL_JQ_SELECTOR='.message + " - " + .exc_msg + " - " + .exc_info'
 
 # Local config
 [[ -f ~/.zshenv.local ]] && source ~/.zshenv.local
+. "$HOME/.cargo/env"
