@@ -216,8 +216,8 @@ def install_brew_dependencies
   puts "Installing basic homebrew packages..."
   run %{brew tap homebrew/cask-fonts}
   run %{brew install cask font-hack-nerd-font}
-  run %{brew install starship flycut vim ack direnv git watch tree zlib python pyenv go graphviz ffmpeg httpie boost curl wget webp libxml2 libyaml archey carthage jq terraform protobuf kubectx fzf zoxide}
-  run %{brew install libvorbis openal-soft}
+  run %{brew install -v starship flycut vim ack direnv git watch tree zlib python pyenv go graphviz ffmpeg httpie boost curl wget webp libxml2 libyaml archey4 carthage jq terraform protobuf kubectx fzf zoxide}
+  run %{brew install -v libvorbis openal-soft}
 
   puts "Installing Google Cloud SDK..."
   run %{brew install google-cloud-sdk krew}
@@ -225,22 +225,22 @@ def install_brew_dependencies
 
   browsers = 'google-chrome firefox'
   if Ask.confirm("Install browsers? (#{browsers})", clear: true, response: false, default: true)
-    run %{brew cask install #{browsers}}
+    run %{brew install --cask #{browsers}}
   end
 
   dev_tools = 'iterm2 tower docker'
   if Ask.confirm("Install dev tools? (#{dev_tools})", clear: true, response: false, default: true)
-    run %{brew cask install #{dev_tools}}
+    run %{brew install --cask #{dev_tools}}
   end
 
-  tools = 'spectacle lastpass vlc the-unarchiver zoomus notion'
+  tools = 'spectacle vlc the-unarchiver zoomus notion'
   if Ask.confirm("Install essential utils? (#{tools})", clear: true, response: false, default: true)
-    run %{brew cask install #{tools}}
+    run %{brew install --cask #{tools}}
   end
 
   fun = 'boxer'
   if Ask.confirm("Install fun stuff? (#{fun})", clear: true, response: false, default: true)
-    run %{brew cask install #{fun}}
+    run %{brew install --cask #{fun}}
   end
 end
 
@@ -260,6 +260,7 @@ end
 
 def install_rust
   run %{curl https://sh.rustup.rs -sSf | sh -s -- -v -y}
+  run %{source ~/.zshrc}
   run %{cargo install bat exa du-dust fd-find ripgrep hyperfine tokei sd ytop bandwhich procs gping}
 end
 
