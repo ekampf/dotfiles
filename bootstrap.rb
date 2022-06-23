@@ -31,16 +31,6 @@ def install
   install_pip_dependencies
 
   puts "======================================================"
-  puts "Installing Node version manager (NVM)"
-  puts "======================================================"
-  install_nvm
-
-  puts "======================================================"
-  puts "Installing RVM"
-  puts "======================================================"
-  install_rvm
-
-  puts "======================================================"
   puts "Installing Rust"
   puts "======================================================"
   install_rust
@@ -216,12 +206,21 @@ def install_brew_dependencies
   puts "Installing basic homebrew packages..."
   run %{brew tap homebrew/cask-fonts}
   run %{brew install cask font-hack-nerd-font}
-  run %{brew install starship flycut vim ack direnv git watch tree zlib python pyenv go graphviz ffmpeg httpie boost curl wget webp libxml2 libyaml archey4 carthage jq terraform protobuf kubectx fzf zoxide}
+  run %{brew install coreutils asdf starship flycut vim ack direnv git watch tree zlib python pyenv graphviz ffmpeg httpie boost curl wget webp libxml2 libyaml archey carthage jq terraform protobuf kubectx fzf zoxide}
   run %{brew install libvorbis openal-soft}
 
   puts "Installing Google Cloud SDK..."
   run %{brew install google-cloud-sdk krew}
   run %{gcloud components install docker-credential-gcr cloud-build-local kustomize}
+
+  puts "Installing ASDF"
+  run %{brew install asdf coreutils }
+  run %{. /usr/local/opt/asdf/libexec/asdf.sh}
+  run %{asdf plugin-add pythond}
+  run %{asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git}
+  run %{asdf plugin-add golang https://github.com/kennyp/asdf-golang.git}
+  run %{asdf install golang latest}
+  run %{asdf install nodejs latest}
 
   browsers = 'google-chrome firefox'
   if Ask.confirm("Install browsers? (#{browsers})", clear: true, response: false, default: true)
@@ -247,15 +246,6 @@ end
 def install_pip_dependencies
   run %{pip3 install -U pip setuptools virtualenv}
   run %{pip3 install git-sweep httpie}
-end
-
-def install_nvm
-  run %{curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.0/install.sh | sh}
-end
-
-def install_rvm
-  run %{curl -sSL https://get.rvm.io | sh -s head}
-  puts 'RVM Installed! Run `rvm install ruby --latest` in a new terminal window to install latest Ruby'
 end
 
 def install_rust

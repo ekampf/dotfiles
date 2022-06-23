@@ -20,32 +20,8 @@ COMPLETION_WAITING_DOTS="true"
 # https://github.com/keybase/keybase-issues/issues/2798
 export GPG_TTY=$(tty)
 
-# Load nvm
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-autoload -U add-zsh-hook
-load-nvmrc() {
-  local node_version="$(nvm version)"
-  local nvmrc_path="$(nvm_find_nvmrc)"
-
-  if [ -n "$nvmrc_path" ]; then
-    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
-
-    if [ "$nvmrc_node_version" = "N/A" ]; then
-      nvm install
-    elif [ "$nvmrc_node_version" != "$node_version" ]; then
-      nvm use
-    fi
-  elif [ "$node_version" != "$(nvm version default)" ]; then
-    echo "Reverting to nvm default version"
-    nvm use default
-  fi
-}
-add-zsh-hook chpwd load-nvmrc
-load-nvmrc
-
+# ASDF
+. /usr/local/opt/asdf/libexec/asdf.sh
 
 # Prompt 
 
@@ -229,6 +205,10 @@ elif type compctl &>/dev/null; then
 fi
 ###-end-npm-completion-###
 
+# GKE auth
+USE_GKE_GCLOUD_AUTH_PLUGIN=True
+
 
 # Local config
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
+
