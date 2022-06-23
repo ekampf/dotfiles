@@ -168,6 +168,14 @@ def brew_installed?
   !run('which brew').empty?
 end
 
+def rust_installed?
+  !run('which rustup').empty?
+end
+
+def asdf_installed?
+  !run('which asdf').empty?
+end
+
 def zsh_active?
   ENV['SHELL'] =~ /zsh/
 end
@@ -213,13 +221,16 @@ def install_brew_dependencies
   run %{brew install google-cloud-sdk krew}
   run %{gcloud components install docker-credential-gcr cloud-build-local kustomize}
 
-  puts "Installing ASDF"
-  run %{brew install asdf coreutils }
-  run %{. /usr/local/opt/asdf/libexec/asdf.sh}
-  run %{asdf plugin-add pythond}
+  unless asdf_installed?
+    puts "Installing ASDF"
+    run %{brew install asdf coreutils }
+    run %{. /usr/local/opt/asdf/libexec/asdf.sh}
+  end
+  run %{asdf plugin-add python}
   run %{asdf plugin add ruby https://github.com/asdf-vm/asdf-ruby.git}
   run %{asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git}
   run %{asdf plugin-add golang https://github.com/kennyp/asdf-golang.git}
+  run %{asdf install python latest}
   run %{asdf install ruby latest}
   run %{asdf install golang latest}
   run %{asdf install nodejs latest}
@@ -251,7 +262,9 @@ def install_pip_dependencies
 end
 
 def install_rust
-  run %{curl https://sh.rustup.rs -sSf | sh -s -- -v -y}
+  unless rust_installed?
+    run %{curl https://sh.rustup.rs -sSf | sh -s -- -v -y}
+  end
   run %{cargo install bat exa du-dust fd-find ripgrep hyperfine tokei sd ytop bandwhich procs gping}
 end
 
