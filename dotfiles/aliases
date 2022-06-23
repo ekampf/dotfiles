@@ -46,6 +46,7 @@ alias zshenv='$EDITOR ~/.zshenv'
 # Misc System
 alias e='exit'
 alias brewuu="brew update && brew upgrade"
+alias asdfpu="asdf plugin update --all"
 
 # Pipe my public key to my clipboard.
 alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
