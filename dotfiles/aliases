@@ -14,7 +14,7 @@ alias du="dust"
 alias time="hyperfine"
 alias cloc="tokei"
 alias ps="procs"
-alias sed="sd"
+# alias sed="sd"
 alias top="btm"
 alias htop="btm"
 
@@ -128,6 +128,8 @@ alias secrets='kubectl get secret'
 alias get='kubectl get'
 alias logs='kubectl logs'
 alias desc='kubectl describe'
+alias ktop='kubectl top pod'
+alias ktopn='kubectl top node'
 
 # edit ops
 alias kedit='kubectl edit'
@@ -141,6 +143,18 @@ kssha() { kubectl exec $1 -ti -- /bin/ash; }
 
 # Show all alias related kubernetes
 kalias() { alias | grep 'kubectl' | sed "s/^\([^=]*\)=\(.*\)/\1 => \2/"| sed "s/['|\']//g" | sort; }
+
+# Watches
+alias kwdep='watch kgd'
+alias kws='watch kgs'
+alias kwss='watch kgss'
+alias kwpod='watch kgp'
+alias kwi='watch kgi'
+
+alias delconnectors='kubectl get pods | grep "connector-" | awk "{print $1}" | xargs kubectl delete pod'
+alias deltwinconnectors='kubectl get pods -n twingate | grep "connector-" | awk "{print $1}" | xargs kubectl delete pod -n twingate'
+
+podssh() { kssh $(kgp | grep $1 | awk '{print $1}'); }
 
 
 # ------------------------------------
