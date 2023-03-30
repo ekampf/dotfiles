@@ -204,3 +204,6 @@ USE_GKE_GCLOUD_AUTH_PLUGIN=True
 # Local config
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
 
+
+source /Users/ekampf/.docker/init-zsh.sh || true # Added by Docker Desktop
+source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
