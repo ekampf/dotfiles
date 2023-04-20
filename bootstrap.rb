@@ -272,8 +272,8 @@ def install_brew_dependencies
 end
 
 def install_pip_dependencies
-  run %{pip3 install -U pip setuptools virtualenv}
-  run %{pip3 install git-sweep httpie}
+  run %{pip3 install -U pip}
+  run %{pip3 install git-sweep}
 end
 
 def install_rust
