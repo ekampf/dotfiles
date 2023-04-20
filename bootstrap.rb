@@ -250,11 +250,6 @@ def install_brew_dependencies
   run %{asdf install nodejs latest}
   run %{asdf install terraform latest}
 
-  browsers = 'google-chrome firefox'
-  if Ask.confirm("Install browsers? (#{browsers})", clear: true, response: false, default: true)
-    run %{brew install --cask #{browsers}}
-  end
-
   dev_tools = 'iterm2 tower docker'
   if Ask.confirm("Install dev tools? (#{dev_tools})", clear: true, response: false, default: true)
     run %{brew install --cask #{dev_tools}}
