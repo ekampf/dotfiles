@@ -28,7 +28,6 @@ export GPG_TTY=$(tty)
 ZSH_THEME="agnoster"
 
 setopt promptsubst
-archey
 
 eval "$(starship init zsh)"
 
