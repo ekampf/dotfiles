@@ -208,7 +208,8 @@ end
 
 def install_brew_dependencies
   unless brew_installed?
-    run 'NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'
+    puts "Install Homebrew first!"
+    exit!
   end
 
   puts "Installing basic homebrew packages..."
