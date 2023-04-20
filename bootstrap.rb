@@ -224,7 +224,7 @@ def install_brew_dependencies
 
   unless asdf_installed?
     puts "Installing ASDF"
-    run %{brew install asdf coreutils }
+    run %{brew install asdf}
     run %{. /usr/local/opt/asdf/libexec/asdf.sh}
   end
   run %{asdf plugin-add python}
