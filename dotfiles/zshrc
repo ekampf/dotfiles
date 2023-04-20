@@ -196,13 +196,16 @@ elif type compctl &>/dev/null; then
 fi
 ###-end-npm-completion-###
 
+# atuin (smart history)
+eval "$(atuin init zsh)"
+
+# Added by Docker Desktop
+source /Users/ekampf/.docker/init-zsh.sh || true 
+source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
+
 # GKE auth
 USE_GKE_GCLOUD_AUTH_PLUGIN=True
-
 
 # Local config
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
 
-
-source /Users/ekampf/.docker/init-zsh.sh || true # Added by Docker Desktop
-source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
