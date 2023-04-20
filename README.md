@@ -16,6 +16,9 @@ Install required gems:
 
     gem install bundler && bundle install
 
+
+Install Homebrew (see https://brew.sh/)
+
 Run the bootstrap script:
 
     bundle exec ruby bootstrap.rb
