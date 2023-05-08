@@ -239,8 +239,7 @@ def install_brew_dependencies
   run %{asdf install ruby latest}
   run %{asdf install golang latest}
   run %{asdf install nodejs latest}
-  run %{asdf install terraform latest}
-
+  
   dev_tools = 'iterm2 tower'
   if Ask.confirm("Install dev tools? (#{dev_tools})", clear: true, response: false, default: true)
     run %{brew install --cask #{dev_tools}}
