@@ -117,6 +117,8 @@ alias jqopa="jq '.time + \" - \" + .msg + \" - \" + .req_method + \" - \" + .req
 # Kubernetes aliases
 # ------------------------------------
 
+alias kc='kubectx'
+
 # read ops
 alias pods='kubectl get pods'
 alias svc='kubectl get svc'
