@@ -1,4 +1,4 @@
-plugins=(yarn git bundler gem nvm macos kubectl brew python pip rust helm vault gcloud encode64)
+plugins=(yarn git bundler gem macos kubectl brew python pip rust helm vault gcloud encode64)
 
 source $ZSH/oh-my-zsh.sh
 
