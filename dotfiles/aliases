@@ -158,6 +158,7 @@ alias deltwinconnectors='kubectl get pods -n twingate | grep "connector-" | awk 
 
 podssh() { kssh $(kgp | grep $1 | awk '{print $1}'); }
 
+kdebug() { kubectl run -i --rm --tty debug --image=busybox --restart=Never -- sh }
 
 # ------------------------------------
 # Docker alias and function
