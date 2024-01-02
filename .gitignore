@@ -6,3 +6,5 @@ vendor
 /dotfiles/config/gcloud
 /dotfiles/config/configstore/update-notifier-npm.json
 /dotfiles/config/configstore/nodemon.json
+/dotfiles/config/wireshark
+/dotfiles/config/gatsby
