@@ -213,8 +213,7 @@ def install_brew_dependencies
   end
 
   puts "Installing basic homebrew packages..."
-  run %{brew tap homebrew/cask-fonts}
-  run %{brew install cask font-hack-nerd-font}
+  run %{brew install --cask font-hack-nerd-font}
   run %{brew install atuin gh coreutils starship flycut vim ack git watch tree zlib graphviz ffmpeg httpie boost curl wget webp libxml2 libyaml carthage jq terraform protobuf kubectx fzf zoxide}
   run %{brew install libvorbis openal-soft}
 
