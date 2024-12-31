@@ -125,9 +125,6 @@ _load_settings() {
 }
 _load_settings "$HOME/.zsh/configs"
 
-# direnv
-eval "$(direnv hook zsh)"
-
 # Init Zoxide
 eval "$(zoxide init zsh)"
 
