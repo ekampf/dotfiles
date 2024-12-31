@@ -214,7 +214,7 @@ def install_brew_dependencies
 
   puts "Installing basic homebrew packages..."
   run %{brew install --cask font-hack-nerd-font}
-  run %{brew install atuin gh coreutils starship flycut vim ack git watch tree zlib graphviz ffmpeg httpie boost curl wget webp libxml2 libyaml carthage jq terraform protobuf kubectx fzf zoxide}
+  run %{brew install atuin gh coreutils starship flycut vim ack git watch tree zlib graphviz ffmpeg httpie boost curl wget webp libxml2 libyaml carthage jq protobuf kubectx fzf zoxide}
   run %{brew install libvorbis openal-soft}
 
   puts "Installing Google Cloud SDK..."
