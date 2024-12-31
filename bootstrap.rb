@@ -223,7 +223,7 @@ def install_brew_dependencies
 
   unless asdf_installed?
     puts "Installing ASDF"
-    run %{git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.11.3}
+    run %{git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.15.0}
     run %{. "$HOME/.asdf/asdf.sh"}
   end
   run %{asdf plugin-add python}
