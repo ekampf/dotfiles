@@ -1,4 +1,4 @@
-plugins=(yarn git bundler gem macos kubectl brew python pip rust helm vault gcloud encode64)
+plugins=(yarn git bundler gem macos kubectl brew python pip rust helm gcloud encode64)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -205,3 +205,8 @@ USE_GKE_GCLOUD_AUTH_PLUGIN=True
 # Local config
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
 
+# Wasmer
+export WASMER_DIR="/Users/ekampf/.wasmer"
+[ -s "$WASMER_DIR/wasmer.sh" ] && source "$WASMER_DIR/wasmer.sh"
+
+. "$HOME/.local/bin/env"
