@@ -142,6 +142,10 @@ alias keditdep='kubectl edit deployment'
 # Open shell to a running pod
 kssh() { kubectl exec $1 -ti -- bash; }
 kssha() { kubectl exec $1 -ti -- /bin/ash; }
+podssh() { kssh $(kgp | grep $1 | awk '{print $1}'); }
+
+# Open django shell on a running pod
+podds() { kubectl exec $(kgp | grep $1 | awk '{print $1}') -ti -- python ./manage.py shell; }
 
 # Show all alias related kubernetes
 kalias() { alias | grep 'kubectl' | sed "s/^\([^=]*\)=\(.*\)/\1 => \2/"| sed "s/['|\']//g" | sort; }
@@ -156,8 +160,7 @@ alias kwi='watch kgi'
 alias delconnectors='kubectl get pods | grep "connector-" | awk "{print $1}" | xargs kubectl delete pod'
 alias deltwinconnectors='kubectl get pods -n twingate | grep "connector-" | awk "{print $1}" | xargs kubectl delete pod -n twingate'
 
-podssh() { kssh $(kgp | grep $1 | awk '{print $1}'); }
-
+# Debugging
 kdebug() { kubectl run -i --rm --tty debug --image=busybox --restart=Never -- sh }
 
 # ------------------------------------
