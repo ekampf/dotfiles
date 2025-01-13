@@ -8,3 +8,11 @@ vendor
 /dotfiles/config/configstore/nodemon.json
 /dotfiles/config/wireshark
 /dotfiles/config/gatsby
+/dotfiles/config/configstore
+/dotfiles/config/fish
+/dotfiles/config/github-copilot
+/dotfiles/config/packer
+/dotfiles/config/pulse
+/dotfiles/config/raycast
+/dotfiles/config/swi-prolog
+/dotfiles/config/uv
