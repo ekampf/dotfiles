@@ -211,3 +211,4 @@ export WASMER_DIR="/Users/ekampf/.wasmer"
 [ -s "$WASMER_DIR/wasmer.sh" ] && source "$WASMER_DIR/wasmer.sh"
 
 . "$HOME/.local/bin/env"
+source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
