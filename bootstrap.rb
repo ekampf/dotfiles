@@ -218,24 +218,22 @@ def install_brew_dependencies
   run %{brew install libvorbis openal-soft}
 
   puts "Installing Google Cloud SDK..."
-  run %{brew install google-cloud-sdk krew}
+  run %{brew install google-cloud-sdk krew kustomize}
   run %{gcloud components install docker-credential-gcr cloud-build-local kustomize}
 
   unless asdf_installed?
     puts "Installing ASDF"
-    run %{git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.15.0}
-    run %{. "$HOME/.asdf/asdf.sh"}
+    run %{brew install asdf}
   end
-  run %{asdf plugin-add python}
-  run %{asdf plugin-add direnv}
-  run %{asdf plugin-add poetry https://github.com/asdf-community/asdf-poetry.git}  
+  run %{asdf plugin add python}
+  run %{asdf plugin add direnv}
+  run %{asdf plugin add poetry https://github.com/asdf-community/asdf-poetry.git}  
   run %{asdf plugin add ruby https://github.com/asdf-vm/asdf-ruby.git}
   run %{asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git}
-  run %{asdf plugin-add golang https://github.com/kennyp/asdf-golang.git}
+  run %{asdf plugin add golang https://github.com/kennyp/asdf-golang.git}
   run %{asdf install direnv latest}
   run %{asdf install python latest}
   run %{asdf install poetry latest}
-  run %{asdf install ruby latest}
   run %{asdf install golang latest}
   run %{asdf install nodejs latest}
   
@@ -247,11 +245,6 @@ def install_brew_dependencies
   tools = 'rectangle vlc the-unarchiver'
   if Ask.confirm("Install essential utils? (#{tools})", clear: true, response: false, default: true)
     run %{brew install --cask #{tools}}
-  end
-
-  fun = 'boxer'
-  if Ask.confirm("Install fun stuff? (#{fun})", clear: true, response: false, default: true)
-    run %{brew install --cask #{fun}}
   end
 end
 

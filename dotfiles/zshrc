@@ -20,9 +20,6 @@ COMPLETION_WAITING_DOTS="true"
 # https://github.com/keybase/keybase-issues/issues/2798
 export GPG_TTY=$(tty)
 
-# ASDF
-. "$HOME/.asdf/asdf.sh"
-
 # Prompt 
 
 ZSH_THEME="agnoster"
@@ -195,9 +192,6 @@ fi
 
 # atuin (smart history)
 eval "$(atuin init zsh)"
-
-# Added by Docker Desktop
-source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
 
 # GKE auth
 USE_GKE_GCLOUD_AUTH_PLUGIN=True
