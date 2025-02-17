@@ -133,6 +133,9 @@ alias desc='kubectl describe'
 alias ktop='kubectl top pod'
 alias ktopn='kubectl top node'
 
+# HACK: forces watch to expand aliases
+alias watch='watch '
+
 # edit ops
 alias kedit='kubectl edit'
 alias kdel='kubectl delete'
