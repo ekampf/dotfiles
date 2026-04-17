@@ -257,7 +257,7 @@ def install_rust
   unless rust_installed?
     run %{curl https://sh.rustup.rs -sSf | sh -s -- -v -y}
   end
-  run %{cargo install bat exa du-dust fd-find ripgrep hyperfine tokei sd ytop bandwhich procs gping}
+  run %{cargo install bat exa du-dust fd-find ripgrep hyperfine tokei sd bandwhich procs gping silicon bandwhich trippy diskonaut dua-cli just claude-code-statusline}
 end
 
 def customize_osx
