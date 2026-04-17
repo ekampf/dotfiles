@@ -148,7 +148,7 @@ kssha() { kubectl exec $1 -ti -- /bin/ash; }
 podssh() { kssh $(kgp | grep $1 | awk '{print $1}'); }
 
 # Open django shell on a running pod
-podds() { kubectl exec $(kgp | grep $1 | awk '{print $1}') -ti -- python ./manage.py shell; }
+podds() { kubectl exec $(kgp | grep $1 | awk '{print $1}') -ti -- python ./manage.py shell_plus; }
 
 # Show all alias related kubernetes
 kalias() { alias | grep 'kubectl' | sed "s/^\([^=]*\)=\(.*\)/\1 => \2/"| sed "s/['|\']//g" | sort; }
@@ -220,6 +220,28 @@ dbash() { docker exec -it $(docker ps -aqf "name=$1") bash; }
 
 # ash into running container
 dash() { docker exec -it $(docker ps -aqf "name=$1") ash; }
+
+# ------------------------------------
+# AI
+# ------------------------------------
+
+cdx() {
+    if [[ "$1" == "update" ]]; then
+        npm install -g @openai/codex@latest
+    else
+        codex -m gpt-5 -c model_reasoning="hight" --search "$@"
+    fi
+}
+
+cl() {
+    if [[ "$1" == "update" ]]; then
+        npm install -g @anthropic-ai/claude-code
+    else
+        claude
+    fi
+}
+
+alias claudh="uvx claude-code-log --open-browser"
 
 # Include custom aliases
 [[ -f ~/.aliases.local ]] && source ~/.aliases.local
