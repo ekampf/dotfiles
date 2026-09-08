@@ -145,10 +145,24 @@ alias keditdep='kubectl edit deployment'
 # Open shell to a running pod
 kssh() { kubectl exec $1 -ti -- bash; }
 kssha() { kubectl exec $1 -ti -- /bin/ash; }
-podssh() { kssh $(kgp | grep $1 | awk '{print $1}'); }
+
+# Resolve a pod-name fragment to a single pod name (first match on the NAME column).
+# Must stay a single name: two names before `--` makes kubectl exec reject the whole
+# command with "exec [POD] [COMMAND] is not supported anymore".
+kpod() {
+  local pod
+  pod=$(kubectl get pods --no-headers | awk -v p="$1" '$1 ~ p {print $1; exit}')
+  if [[ -z "$pod" ]]; then
+    echo "kpod: no pod matching '$1'" >&2
+    return 1
+  fi
+  echo "$pod"
+}
+
+podssh() { local pod; pod=$(kpod "$1") || return; kssh "$pod"; }
 
 # Open django shell on a running pod
-podds() { kubectl exec $(kgp | grep $1 | awk '{print $1}') -ti -- python ./manage.py shell_plus; }
+podds() { local pod; pod=$(kpod "$1") || return; echo "-> $pod" >&2; kubectl exec "$pod" -ti -- python ./manage.py shell_plus; }
 
 # Show all alias related kubernetes
 kalias() { alias | grep 'kubectl' | sed "s/^\([^=]*\)=\(.*\)/\1 => \2/"| sed "s/['|\']//g" | sort; }
