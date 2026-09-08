@@ -1,5 +1,5 @@
 auto-update-channel = tip
-scrollback-limit = 100000000
+scrollback-limit = 1000000000
 
 theme = "ayu"
 shell-integration-features = no-cursor,sudo,no-title
